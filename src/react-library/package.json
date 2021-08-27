@@ -1,0 +1,34 @@
+{
+  "name": "formik-tastic",
+  "version": "0.0.2",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -cw"
+  },
+  "keywords": [
+    "react-json-form",
+    "react-json-schema-form",
+    "json-schema-form",
+    "json-form",
+    "formik-json",
+    "formik-schema",
+    "schema-form",
+    "form",
+    "validation",
+    "bootstrap"
+  ],
+  "author": "Harvey Ramer <harvey@harveyramer.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^2.56.3",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.4.2"
+  }
+}
