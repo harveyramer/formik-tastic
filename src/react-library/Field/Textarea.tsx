@@ -18,7 +18,7 @@ const Textarea = ({ config, formik, value = '', error }:FieldProps) => {
             name={ name }
             className={ fieldClass + ( error ? ' is-invalid ' : '' ) }
             value={ value }
-            onChange={ changeHandler.bind(this, handleChange, formik, config) }
+            onChange={ () => changeHandler(handleChange, formik, config) }
             onBlur={ handleBlur }
             { ...attributes }
         />

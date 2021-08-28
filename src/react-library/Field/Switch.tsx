@@ -14,8 +14,7 @@ const Switch = ({ config, formik, value = false, error }: FieldProps) => {
     <label className={fieldClass + (error ? " is-invalid " : "")}>
       <ReactSwitch
         checked={value}
-        onChange={changeHandler.bind(
-          this,
+        onChange={() => changeHandler(
           setFieldValueWrapper(setFieldValue, name),
           formik,
           config

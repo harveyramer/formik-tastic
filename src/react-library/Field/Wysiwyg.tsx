@@ -44,8 +44,8 @@ const Wysiwyg = ({ config, formik, value = '', error }:FieldProps) => {
                     id={ name }
                     value={ value }
                     className={ error ? ' is-invalid ' : '' }
-                    onChange={
-                        changeHandler.bind(this, setFieldValueWrapper(setFieldValue, name), formik, config)
+                    onChange={ () =>
+                        changeHandler(setFieldValueWrapper(setFieldValue, name), formik, config)
                     }
                     { ...toolbarOptions }
                     { ... attributes } />
@@ -57,7 +57,7 @@ const Wysiwyg = ({ config, formik, value = '', error }:FieldProps) => {
                         className={ textareaClass }
                         rows={10}
                         value={ value }
-                        onChange={ changeHandler.bind(this, handleChange, formik, config) }
+                        onChange={() => changeHandler(handleChange, formik, config) }
                     />
                 }
             </div>

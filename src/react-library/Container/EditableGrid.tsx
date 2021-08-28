@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _, { fromPairs } from 'lodash';
 import React from 'react';
 import Element from '../Element';
 import PropTypes, { string } from 'prop-types';
@@ -7,8 +7,8 @@ import { joinNames } from '../utils';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { EditableGridProps, TableBodyProps, TableRowProps } from './types';
 
-type PointerArgs = { oldIndex: number, newIndex: number};
-const onSortEnd = ( move: Function, { oldIndex, newIndex }: PointerArgs ) => move(oldIndex, newIndex);
+// type PointerArgs = { oldIndex: number, newIndex: number};
+// const onSortEnd = ((move:(oldIndex:number, newIndex:number)) => move(oldIndex, newIndex));
 const SortableItem = SortableElement((props:TableRowProps) => renderTableRow(props));
 const SortableTableBody = SortableContainer((props:TableBodyProps) => renderTableBody(props));
 const SortableRowHandle = SortableHandle(() => renderSortableHandle());
@@ -40,7 +40,7 @@ const renderTableRow = ({ fieldArrayName, elements, arrayActions, rowIndex, butt
                             <button
                                 type="button"
                                 className="btn remove"
-                                onClick={ arrayActions.remove.bind(this, rowIndex) }>{ buttons.remove }
+                                onClick={ () => arrayActions.remove( rowIndex) }>{ buttons.remove }
                             </button>
                         )
                     )
@@ -52,7 +52,7 @@ const renderTableRow = ({ fieldArrayName, elements, arrayActions, rowIndex, butt
                             <button
                                 type="button"
                                 className="btn duplicate"
-                                onClick={ arrayActions.push.bind(this, value) }>{ buttons.duplicate }
+                                onClick={ () => arrayActions.push( value) }>{ buttons.duplicate }
                             </button>
                         )
                     )
@@ -107,9 +107,9 @@ const EditableGrid = ({
                                 </tr>
                             </thead>
                             { isObject === false && isSortable
-                                ? <SortableTableBody
+                                ?  <SortableTableBody
                                     distance={ 10 }
-                                    onSortEnd={ onSortEnd.bind(this, arrayActions.move) }
+                                    onSortEnd={() => (oldIndex:number, newIndex:number) => arrayActions.move(oldIndex, newIndex) }
                                     useDragHandle={ true }
                                     { ...bodyProps }
                                 />
@@ -125,7 +125,7 @@ const EditableGrid = ({
                                                     <button
                                                         type="button"
                                                         className="btn btn-secondary"
-                                                        onClick={ arrayActions.push.bind(this, arrayFields) }>{ buttons.add }
+                                                        onClick={ () =>arrayActions.push(arrayFields) }>{ buttons.add }
                                                     </button>
                                                 )
                                             }

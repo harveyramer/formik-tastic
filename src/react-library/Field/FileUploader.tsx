@@ -63,12 +63,12 @@ const prepareFileUploderOptions = (
   formik:any,
   config:any
 ) => {
-  options.onDrop = onDrop ? onDrop.bind(this, formik, config) : null;
+  options.onDrop = onDrop ? () => onDrop(formik, config) : null;
   options.onDropAccepted = onDropAccepted
-    ? onDropAccepted.bind(this, formik, config)
+    ? () => onDropAccepted(formik, config)
     : null;
   options.onDropRejected = onDropRejected
-    ? onDropRejected.bind(this, formik, config)
+    ? () => onDropRejected(formik, config)
     : null;
 
   return options;
