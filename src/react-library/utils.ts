@@ -19,7 +19,7 @@ export const getName = (type: string, name: string, ...args: any[]) => type === 
  * @param  {string} key
  * @return {void}
  */
-export const changeHandler = (handler: ((data:any) => void), formikProps: FormikProps<any>, config: any, data:any, key = 'onChange') => {
+export const changeHandler = (handler: ((data: any) => void), formikProps: FormikProps<any>, config: any, data?: any, key = 'onChange') => {
     handler(data);
     _.isFunction(config[key]) && config[key](formikProps, config, data);
 };
@@ -39,14 +39,14 @@ export const prepareValidationSchema = (schema: Indexable): any => {
         };
     }
 
-    const elementSchema = _.reduce(elements, (result:Indexable = {}, element, key) => {
+    const elementSchema = _.reduce(elements, (result: Indexable = { }, element, key) => {
         return {
             ...result,
             ...prepareValidationSchema(element)
         };
-    }, {});
+    }, { });
 
-    let result:Indexable = {};
+    let result: Indexable = { };
     if (renderer === 'editable-grid' && !_.isEmpty(elementSchema)) {
         result[name] = [['array', [['object', elementSchema]]]];
     } else if (!_.isEmpty(elementSchema) && name) {
