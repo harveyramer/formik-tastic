@@ -12,7 +12,8 @@ const Button = ({ config, formik }:FieldProps) => {
     };
 
     if(typeof onClick === 'function') {
-        buttonProps.onClick = onClick.bind(this, formik, config);
+        // buttonProps.onClick = onClick.bind(this, formik, config);
+        buttonProps.onClick = (...rest) => onClick(formik, config);
     }
 
     return (

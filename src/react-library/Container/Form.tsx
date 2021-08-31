@@ -4,8 +4,9 @@ import Element from "../Element";
 import { getName } from "../utils";
 import PropTypes from "prop-types";
 import { Form as FormikDOMForm } from "formik";
+import { HTMLElementConfig } from "./types";
 
-const Form = ({ config }: { config: any }) => {
+const Form = ({ config }: { config: HTMLElementConfig }) => {
   const {
     name: containerName = "",
     elements,
@@ -13,7 +14,7 @@ const Form = ({ config }: { config: any }) => {
     comment,
     commentClass = "text-muted d-block mb-3",
   } = config;
-
+  
   return (
     <FormikDOMForm className={htmlClass}>
       {comment && <small className={commentClass}>{comment}</small>}

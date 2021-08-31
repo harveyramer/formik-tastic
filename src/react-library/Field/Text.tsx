@@ -31,7 +31,7 @@ const Text = ({ config, formik, value = '', error }:FieldProps) => {
                     type={ fieldType }
                     className={ fieldClass + ( error ? ' is-invalid ' : '' ) }
                     value={ value }
-                    onChange={ changeHandler.bind(this, handleChange, formik, config) }
+                    onChange={ (data) => changeHandler(handleChange, formik, config, data) }
                     onBlur={ handleBlur }
                     { ...attributes }
                 />
@@ -42,7 +42,7 @@ const Text = ({ config, formik, value = '', error }:FieldProps) => {
                 type={ fieldType }
                 className={ fieldClass + ( error ? ' is-invalid ' : '' ) }
                 value={ value }
-                onChange={ changeHandler.bind(this, handleChange, formik, config) }
+                onChange={ (data) => changeHandler(handleChange, formik, config, data) }
                 onBlur={ handleBlur }
                 { ...attributes }
             />

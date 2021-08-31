@@ -1,27 +1,43 @@
 import _ from "lodash";
-import React, { useEffect, useCallback, useState, RefObject, ReactNode, ForwardedRef, MutableRefObject } from "react";
-import { Formik, FormikProps, FormikValues, FormikFormProps } from "formik";
+import React, {
+  useEffect,
+  useCallback,
+  useState,
+  RefObject,
+  ReactNode,
+  ForwardedRef,
+  MutableRefObject,
+  PropsWithChildren,
+  ForwardRefExoticComponent,
+  RefAttributes,
+} from "react";
+import {
+  Formik,
+  FormikProps,
+  FormikValues,
+  FormikFormProps,
+  FormikHelpers,
+} from "formik";
 import Element from "./Element";
 import { SchemaProvider } from "./withFormConfig";
 import { prepareValidationSchema } from "./utils";
 import Rules from "@flipbyte/yup-schema";
 
-type FormProps = {
-  onUpdate: Function;
+export type FormInitProps = {
+  onUpdate?: (values: any, formikHelpers?: FormikHelpers<any>) => void;
+  onSubmit: (
+    values: any,
+    formikHelpers?: FormikHelpers<any>
+  ) => void | Promise<any>;
   schema: any;
-  values: any[];
+  values?: any[];
+  initialValues?: any;
+  onReset?: (values: any, formikHelpers?: FormikHelpers<any>) => void;
+  className?: string;
+  validationSchema?: any;
 };
 
-// type FormikForwardRefProps = {
-//   onUpdate?: Function;
-//   schema?: any;
-//   values?: any;
-//   initialValues?: any;
-//   validationSchema?: any;
-//   children?:ReactNode;
-// };
-
-const FormikForm = ({ onUpdate, schema, ...formik }: FormProps) => {
+const FormikForm = ({ onUpdate, schema, ...formik }: FormInitProps) => {
   /**
    * Callback if provided will be vcalled when form values change
    */
@@ -30,19 +46,14 @@ const FormikForm = ({ onUpdate, schema, ...formik }: FormProps) => {
       onUpdate(formik);
     }
   }, [formik.values]);
-
   return <Element config={schema} />;
 };
 
+
 const Form = React.forwardRef<Element>(
   (
-    {
-      schema,
-      onUpdate = () => {},
-      initialValues = {},
-      ...rest
-    }:any,
-    ref
+    { schema, onUpdate = () => {}, initialValues = {}, ...rest }: any,
+    ref: any
   ) => {
     const [validationSchema, setValidationSchema] = useState(null);
 
@@ -78,9 +89,7 @@ const Form = React.forwardRef<Element>(
     return (
       <SchemaProvider value={{ validationSchema, schema }}>
         <Formik {...formProps} innerRef={ref}>
-          {(props: any) => (
-            <FormikForm onUpdate={onUpdate} schema={schema} {...props} />
-          )}
+          {(props: FormInitProps) => <FormikForm {...props} schema={schema} onUpdate={onUpdate} />}
         </Formik>
       </SchemaProvider>
     );

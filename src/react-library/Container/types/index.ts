@@ -1,15 +1,16 @@
 import { FormikProps } from "formik";
 import { ReactElement, ReactNode } from "react";
 
+export type HTMLElementConfig = {
+  name: string,
+  as: string,
+  elements: any[],
+  htmlClass: string,
+  comment: string,
+  commentClass: string,
+};
 export type HTMLTagProps = {
-  config: {
-    name: string,
-    as: string,
-    elements: any[],
-    htmlClass: string,
-    comment: string,
-    commentClass: string,
-  },
+  config: HTMLElementConfig,
   children: ReactNode
 };
 

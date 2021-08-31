@@ -1,12 +1,15 @@
 {
   "name": "formik-tastic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harveyramer/formik-tastic.git"
+  },
   "version": "0.0.2",
   "description": "",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "/lib/index.js",
   "license": "MIT",
   "files": [
-    "dist"
+    "/lib"
   ],
   "keywords": [
     "react-json-form",
@@ -20,27 +23,17 @@
     "validation",
     "bootstrap"
   ],
-  "types": "dist/index.d.ts",
+  "types": "/lib/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
     "test": "react-scripts test"
   },
   "dependencies": {
-    "@flipbyte/when-condition": "^0.6.0",
-    "@flipbyte/yup-schema": "^0.1.5",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/lodash": "^4.14.172",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "codemirror": "^5.62.3",
     "csstype": "^3.0.8",
     "formik": "^2.2.9",
-    "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.2",
@@ -50,13 +43,9 @@
     "react-select": "^4.3.1",
     "react-sortable-hoc": "^2.0.0",
     "react-switch": "^6.0.0",
-    "shallowequal": "^1.1.0",
-    "tslib": "^2.3.1",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "shallowequal": "^1.1.0"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
     "bootstrap": "^5.1.0",
     "lodash": "^4.17.21",
     "prop-types": "15.7.2",
@@ -64,8 +53,22 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
     "rollup": "^2.56.3",
-    "rollup-plugin-typescript2": "^0.30.0"
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.0-dev.20210830",
+    "web-vitals": "^1.0.1",
+    "@flipbyte/when-condition": "^0.6.0",
+    "@flipbyte/yup-schema": "^0.1.5",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/lodash": "^4.14.172",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
   },
   "eslintConfig": {
     "extends": [

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { SyntheticEvent, useState } from "react";
 import Select from "react-select";
-import { CreatableSelect } from "react-select";
+import Creatable from "react-select/creatable";
 import { changeHandler, setFieldValueWrapper } from "../utils";
 import { FieldProps } from "./types";
 
@@ -148,7 +148,7 @@ const ReactSelect = ({ config, formik, value, error }: FieldProps) => {
     selectProps.value = selectedOption;
   }
 
-  const SelectComponent = isCreatable ? CreatableSelect : Select;
+  const SelectComponent = isCreatable ? Creatable : Select;
   return <SelectComponent {...selectProps} />;
 };
 
