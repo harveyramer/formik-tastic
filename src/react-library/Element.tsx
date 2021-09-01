@@ -14,9 +14,6 @@ const Element = ({
   update?: boolean;
   formik?: any;
 }) => {
-  if (!config) {
-    return null;
-  }
   const { configSource, dataSource } = config;
   const [hasLoadedConfig, setHasLoadedConfig] = useState(false);
   const [hasLoadedData, setHasLoadedData] = useState(dataSource ? false : true);

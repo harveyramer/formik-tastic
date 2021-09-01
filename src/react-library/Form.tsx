@@ -50,7 +50,7 @@ const FormikForm = ({ onUpdate, schema, ...formik }: FormInitProps) => {
 };
 
 
-const Form = React.forwardRef<Element>(
+const Form = React.forwardRef<Element, FormInitProps>(
   (
     { schema, onUpdate = () => {}, initialValues = {}, ...rest }: any,
     ref: any

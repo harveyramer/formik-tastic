@@ -16,7 +16,7 @@ const Fieldset = ({
     comment,
     commentClass = "text-muted d-block mb-3",
     headerIconClass = "",
-    cardClass = "card",
+    cardClass = "card mb-4",
     cardHeaderClass = "card-header",
     cardHeaderIconCollapsedClass = "fas fa-angle-down",
     cardHeaderIconDisclosedClass = "fas fa-angle-up",

@@ -4,9 +4,10 @@
     "type": "git",
     "url": "https://github.com/harveyramer/formik-tastic.git"
   },
-  "version": "0.0.2",
+  "version": "0.0.1-rc1",
   "description": "",
-  "main": "/lib/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "license": "MIT",
   "files": [
     "/lib"
@@ -23,7 +24,7 @@
     "validation",
     "bootstrap"
   ],
-  "types": "/lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw",
