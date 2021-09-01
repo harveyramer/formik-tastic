@@ -9,7 +9,7 @@ import Textarea from './Textarea';
 import Checkbox from './Checkbox';
 import InnerText from './InnerText';
 import CodeEditor from './CodeEditor';
-// import ReactSelect from './ReactSelect';
+import ReactSelect from './ReactSelect';
 import FileUploader from './FileUploader';
 import Autocomplete from './Autocomplete';
 
@@ -30,6 +30,6 @@ registerField('textarea', Textarea);
 registerField('checkbox', Checkbox);
 registerField('inner-text', InnerText);
 registerField('code-editor', CodeEditor);
-// registerField('react-select', ReactSelect);
+registerField('react-select', ReactSelect);
 registerField('autocomplete', Autocomplete);
 registerField('file-uploader', FileUploader);

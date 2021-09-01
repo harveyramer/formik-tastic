@@ -3,6 +3,8 @@ import { Controlled as CodeMirror } from 'react-codemirror2';
 import { changeHandler, setFieldValueWrapper } from '../utils';
 import { FieldProps } from './types';
 
+import "codemirror/lib/codemirror.css";
+
 const CodeEditor = ({ config, formik, value, error }:FieldProps) => {
     const {
         name,

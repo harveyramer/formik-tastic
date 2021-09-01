@@ -18,9 +18,7 @@ const rollupConfig = {
       tsconfig: "tsconfig.json",
       useTsconfigDeclarationDir: true,
     }),
-    commonjs({
-      requireReturnsDefault: "preferred",
-    }),
+    commonjs(),
   ],
 };
 

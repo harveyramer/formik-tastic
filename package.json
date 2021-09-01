@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/harveyramer/formik-tastic.git"
   },
-  "version": "0.0.1-rc1.1",
+  "version": "1.0.0-beta.1",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -31,9 +31,10 @@
     "test": "react-scripts test"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
     "@flipbyte/when-condition": "^0.6.0",
     "@flipbyte/yup-schema": "^0.1.5",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@types/codemirror": "^5.60.2",
     "codemirror": "^5.62.3",
     "csstype": "^3.0.8",
     "formik": "^2.2.9",
@@ -43,7 +44,7 @@
     "react-dropzone": "^11.3.4",
     "react-quill": "^2.0.0-beta.2",
     "react-scripts": "4.0.3",
-    "react-select": "^4.3.1",
+    "react-select": "^5.0.0-beta.0",
     "react-sortable-hoc": "^2.0.0",
     "react-switch": "^6.0.0",
     "shallowequal": "^1.1.0"
