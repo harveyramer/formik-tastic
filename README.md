@@ -1,3 +1,286 @@
-# Formik-tastic
+# formik-tastic
 
-This package provides security updates and a TypeScript implementation of the [formik-json](https://www.npmjs.com/package/@flipbyte/formik-json) package created by Flipbyte.
+This package provides security updates and a TypeScript implementation of the [formik-json](https://www.npmjs.com/package/formik-tastic) package created by Flipbyte.
+
+WARNING: This is a pre-release version that is likely to contain bugs. Please use under advisement.
+
+
+[Developed by Harvey Ramer](https://www.harveyramer.com/)
+
+[![npm package][npm-badge]][npm]
+[![license][license-badge]][license]
+
+formik-json is a wrapper for Formik to easily create forms using JSON /
+Javascript Object for defining the elements.
+
+## Examples
+
+-   See example schema definitions in the src/docs directory
+
+## Pre-requisites
+
+The component depends on a few third-party plugins for adding WYSIWYG,
+select, auto-complete, validation etc. Few of them already come packaged
+with the extension and few need to be installed separately in your
+project.
+
+## Installation
+
+You can install formik-tastic using following steps.
+
+```js
+$ npm i formik-tastic
+```
+
+### Quick Start Guide
+
+Once you've finished installation, you can add the form to any of your
+components as follows:
+
+#### Import the Form component
+
+```js
+import { Form } from 'formik-tastic';
+```
+
+##### Prepare your form object
+
+```js
+{
+    "id": "my-new-form",
+    "label": "My New Form",
+    "type": "container",
+    "renderer": "form",
+    "elements": {
+        "save": {
+            "type": "field",
+            "renderer": "button",
+            "name": "save",
+            "label": "Save",
+            "htmlClass": "btn-success",
+            "buttonType": "submit"
+        },
+        "main": {
+            "type": "container",
+            "renderer": "div",
+            "htmlClass": "row",
+            "elements": {
+                "title": {
+                    "name": "attributes.0.title",
+                    "label": "Title",
+                    "type": "field",
+                    "renderer": "text",
+                    "fieldType": "text"
+                },
+                ....
+            }
+        },
+        ....
+    }
+}
+```
+
+##### Add the component anywhere you want
+
+```js
+<Form
+    schema={ /* Your form object here */ }
+    { .../* Other formik props */ } />
+```
+
+### Form Component
+
+* * *
+
+Form component requires the following properties:
+
+| Key               | Description                                                                                         |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| schema            | your schema object                                                                                  |
+| onUpdate          | callback when the values are updated                                                                |
+| initialValues     | check [<Formik />](https://jaredpalmer.com/formik/docs/api/formik)                                  |
+| Formik properties | You can add any of the [<Formik />](https://jaredpalmer.com/formik/docs/api/formik) component props |
+
+### Schema object
+
+* * *
+
+Schema object contains elements which can be one of 2 types: either
+"container" or "field" Each type needs a renderer to render the specific
+component. The "container" has an "elements" key within which you can
+define either new containers or fields.
+
+schema object that has the following keys (all required):
+
+| Key      | Description                                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------- |
+| id       | the ID for the form                                                                                             |
+| label    | the title for the form                                                                                          |
+| type     | "container"                                                                                                     |
+| renderer | "form" (you can use other renderers but if you want the form to have a `<form />` tag use the "form" renderer.) |
+| elements | is an object used to define the elements within the container                                                   |
+
+Note: The schema object can only have one container. You can have
+multiple containers and fields inside the elements object of the main
+schema object.
+
+"elements" is an object with key-value pair where value is another
+object. The value object can either be a of type "container" or "field".
+
+Each container or field requires a renderer which can be set using
+"renderer": "{your_renderer}". You can define you own renderers for both
+containers and keys or use the ones that come with the module.
+
+### Following are the properties for each type of container
+
+#### Common container properties
+
+| Not applicable              | Field               | Property | Description                                                                                                  |
+| --------------------------- | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| none                        | type                | String   | "container"                                                                                                  |
+| button-group                | name                | String   | is used to prepend parent container's name to the children fields when "prefixNameToElement" is set to true. |
+| editable-grid, tabs         | elements            | {}       | is an object that can hold one or more fields or containers within it.                                       |
+| editable-grid, button-group | prefixNameToElement | Bool     |                                                                                                              |
+|                             | showWhen            | String   | Check [when-condition](https://github.com/flipbyte/when-condition)                                           |
+|                             | comment             | String   | comment / description for the container                                                                      |
+|                             | commentClass        | String   | html class for the comment element                                                                           |
+
+#### Container specific properties
+
+| Container     | Field                  | Property                                                  | Description                                                                                                                    |
+| ------------- | ---------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| editable-grid | renderer               | String                                                    | editable-grid                                                                                                                  |
+|               | fields                 | {}                                                        | An object with one or more field definitions in a key-value pair                                                               |
+|               | buttons                | `{"add": "Add", "remove": "X", "duplicate": "Duplicate"}` | has 3 properties, all optional. These can be either function that returns the button or string which is the label for a button |
+|               | isObject               | Bool                                                      | whether the grid displays an object. If set to true, buttons (add, remove and duplicate) will be disabled.                     |
+|               | isSortable             | Bool                                                      | whether the grid rows can be dragged and sorted                                                                                |
+|               | tableContainerClass    | String                                                    | htmlClass for the div wrapping the editable-grid                                                                               |
+|               | tableClass             | String                                                    | htmlClass for the main editable grid                                                                                           |
+| div           | renderer               | String                                                    | div                                                                                                                            |
+|               | name                   | String                                                    | is used to prepend parent container's name to the children fields when "prefixNameToElement" is set to true.                   |
+|               | htmlClass              | String                                                    | htmlClass for the div element                                                                                                  |
+| html-tag      | renderer               | String                                                    | html-tag                                                                                                                       |
+|               | name                   | String                                                    | is used to prepend parent container's name to the children fields when "prefixNameToElement" is set to true.                   |
+|               | as                     | String                                                    | html tag to be used (Default: 'div')                                                                                           |
+|               | htmlClass              | String                                                    | htmlClass for the html-tag  element                                                                                            |
+| fieldset      | renderer               | String                                                    | fieldset                                                                                                                       |
+|               | name                   | String                                                    | is used to prepend parent container's name to the children fields when "prefixNameToElement" is set to true.                   |
+|               | title                  | String                                                    | label for the fieldset                                                                                                         |
+|               | cardClass              | String                                                    | htmlClass for the main wrapping container                                                                                      |
+|               | cardHeaderClass        | String                                                    | htmlClass for the header of the wrapping container                                                                             |
+|               | cardHeaderActionsClass | String                                                    | htmlClass for the container holding the disclose buttons in the header of the container                                        |
+|               | cardBodyClass          | String                                                    | htmlClass for the body of the container                                                                                        |
+| form          | renderer               | String                                                    | form                                                                                                                           |
+|               | name                   | String                                                    | is used to prepend parent container's name to the children fields when "prefixNameToElement" is set to true.                   |
+|               | htmlClass              | String                                                    | any character                                                                                                                  |
+| tabs          | renderer               | String                                                    | tabs                                                                                                                           |
+|               | name                   | String                                                    | is used to prepend parent container's name to the children fields when "prefixNameToElement" is set to true.                   |
+|               | tabs                   | {}                                                        | Object                                                                                                                         |
+|               | cardClass              | String                                                    | same as fieldset                                                                                                               |
+|               | rowClass               | String                                                    | htmlClass for the row div                                                                                                      |
+|               | tabListClass           | String                                                    | htmlClass for tab list                                                                                                         |
+|               | tabListItemClass       | String                                                    | htmlClass for tab list item                                                                                                    |
+|               | tabContentClass        | String                                                    | htmlClass for tab content container                                                                                            |
+|               | tabColumnClass         | String                                                    | htmlClass for tabs container                                                                                                   |
+|               | contentColumnClass     | String                                                    | htmlClass for wrapping the tab content container                                                                               |
+|               | tabActiveClass         | String                                                    | htmlClass for active tabs                                                                                                      |
+|               | tabPaneClass           | String                                                    | htmlClass for single tab pane                                                                                                  |
+| button-group  | renderer               | String                                                    | button-group                                                                                                                   |
+|               | elements               | {}                                                        | the elements can only be of type: "field" with renderer: "button".                                                             |
+
+### Following are the properties for each type of field
+
+#### Common field properties
+
+| Field | Type           |     Property    | Description                                                                   |                                                                                                                                                                             |
+| :---- | :------------- | :-------------: | :---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|       | name           |      String     | html field name attribute                                                     |                                                                                                                                                                             |
+|       | label          |      String     | the label for the field                                                       |                                                                                                                                                                             |
+|       | type           |      String     | "field"                                                                       |                                                                                                                                                                             |
+|       | labelClass     |      String     | html class for the label html element                                         |                                                                                                                                                                             |
+|       | formGroupClass |      String     | html class for the div that wraps the form field                              |                                                                                                                                                                             |
+|       | validation     |      String     | Check [yup-schema](https://github.com/flipbyte/yup-schema)                    |                                                                                                                                                                             |
+|       | showWhen       |      String     | Check [when-condition](https://github.com/flipbyte/when-condition)            |                                                                                                                                                                             |
+|       | enabledWhen    |      String     | Check [when-condition](https://github.com/flipbyte/when-condition)            |                                                                                                                                                                             |
+|       | fieldClass     |      String     | html class for the main html/3-rd party form field                            |                                                                                                                                                                             |
+|       | comment        |      String     | comment / description that goes below the field                               |                                                                                                                                                                             |
+|       | commentAs      |      String     | define the HTML tag to be used for wrapping the comment. (Default: <small />) |                                                                                                                                                                             |
+|       | commentClass   |      String     | html class for the comment element                                            |                                                                                                                                                                             |
+|       | template       | React Component | String                                                                        | define your custom template for the field (check `src/Template/Default.js`) or set the template in the template registry using `registerTemplate` and pass the string key here |
+|       | errorAs        |      String     | define the HTML tag to be used for wrapping the error. (Default: <div />)     |                                                                                                                                                                             |
+|       | errorClass     |      String     | html class for the error element                                              |                                                                                                                                                                             |
+
+#### Field specific properties
+
+| Field         | Type             | Property | Description                                                                                                                                                                                                                                             |
+| :------------ | :--------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| checkbox      | renderer         |  String  | checkbox                                                                                                                                                                                                                                                |
+|               | name             |  String  | html field name attribute                                                                                                                                                                                                                               |
+|               | label            |  String  | the label for the field                                                                                                                                                                                                                                 |
+|               | type             |  String  | "field"                                                                                                                                                                                                                                                 |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+|               | options          |   Array  | Array of objects with keys "value" and "label"                                                                                                                                                                                                          |
+| code-editor   | renderer         |  String  | code-editor                                                                                                                                                                                                                                             |
+|               | name             |  String  | html field name attribute                                                                                                                                                                                                                               |
+|               | label            |  String  | the label for the field                                                                                                                                                                                                                                 |
+|               | options          |    {}    |                                                                                                                                                                                                                                                         |
+|               | defaultValue     |  String  | default field value (untested)                                                                                                                                                                                                                          |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+| radio         | renderer         |  String  | radio                                                                                                                                                                                                                                                   |
+|               | name             |  String  | html field name attribute                                                                                                                                                                                                                               |
+|               | label            |  String  | the label for the field                                                                                                                                                                                                                                 |
+|               | options          |    {}    |                                                                                                                                                                                                                                                         |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+| react-select  | renderer         |  String  | react-select                                                                                                                                                                                                                                            |
+|               | name             |  String  | html field name attribute                                                                                                                                                                                                                               |
+|               | label            |  String  | the label for the field                                                                                                                                                                                                                                 |
+|               | options          |    {}    | array of objects with value and label keys. Example: `[{"label": "Item 1", "value": "value-1"}]`                                                                                                                                                        |
+|               | defaultValue     |  String  | default field value (untested)                                                                                                                                                                                                                          |
+|               | isMulti          |   Bool   | whether it's a mult-select                                                                                                                                                                                                                              |
+|               | isClearable      |   Bool   | displays a clear select button on the select which will clear the selected options                                                                                                                                                                      |
+|               | isDisabled       |   Bool   | disables the select when set to true                                                                                                                                                                                                                    |
+|               | noOptionsMessage | Function | refer [ReactSelect Props](https://react-select.com/props)                                                                                                                                                                                               |
+| switch        | renderer         |  String  | switch                                                                                                                                                                                                                                                  |
+| text          | renderer         |  String  | text                                                                                                                                                                                                                                                    |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+|               | fieldType        |  String  | HTML input type. The value that goes into <input type="{this value here}" />                                                                                                                                                                            |
+|               | defaultValue     |  String  | default field value (untested)                                                                                                                                                                                                                          |
+|               | icon             |  String  | fontawesome icon class                                                                                                                                                                                                                                  |
+|               | inputGroupClass  |  String  | html class for the div that wraps an icon and an input element together                                                                                                                                                                                 |
+| textarea      | renderer         |  String  | textarea                                                                                                                                                                                                                                                |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+|               | rows             |  Number  | Number of rows that the text-area container should show by default                                                                                                                                                                                      |
+| wysiwyg       | renderer         |  String  | wysiwyg                                                                                                                                                                                                                                                 |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+|               | options          |    {}    | [React-quill wysiwyg options](https://github.com/zenoamaro/react-quill)                                                                                                                                                                                 |
+|               | rows             |  Number  | Number of rows that the wysiwyg container should show by default                                                                                                                                                                                        |
+|               | textareaClass    |  String  | the class for the textarea that will show the raw html for the content entered in the wysiwyg                                                                                                                                                           |
+| autocomplete  | renderer         |  String  | autocomplete                                                                                                                                                                                                                                            |
+|               | attributes       |    {}    | is an object that can hold other html field related attributes (if any). Only ones that are not defined using any other key will be used. For example: name already has it's own key and hence "name" key inside the attributes object will do nothing. |
+|               | defaultValue     |  String  | default field value (untested)                                                                                                                                                                                                                          |
+|               | options          |    {}    | Options available in [react-autosuggest plugin](https://github.com/moroshko/react-autosuggest)                                                                                                                                                          |
+| file-uploader | renderer         |  String  | fileuploader                                                                                                                                                                                                                                            |
+|               | options          |    {}    | Options available in [react-dropzone plugin](https://react-dropzone.js.org/)                                                                                                                                                                            |
+|               | formGroupClass   |  String  | html class for the div that wraps the form field                                                                                                                                                                                                        |
+| inner-text    | renderer         |  String  | inner-text                                                                                                                                                                                                                                              |
+|               | as               |  String  | HTML tag to use for the inner-text field                                                                                                                                                                                                                |
+|               | htmlClass        |  String  | HTML class for the tag used                                                                                                                                                                                                                             |
+|               | defaultValue     |  String  | Either used as a static value for the HTML element or as a placeholder when is not defined                                                                                                                                                              |
+| button        | renderer         |  String  | button                                                                                                                                                                                                                                                  |
+|               | content          |  String  | button inner html                                                                                                                                                                                                                                       |
+
+## Thank You
+
+Many thanks to [Flipbyte](https://www.flipbyte.com/) for creating the original version of this project. 
+
+## License
+
+The MIT License (MIT)
+
+[npm-badge]: https://badge.fury.io/js/formik-tastic.svg
+
+[npm]: https://www.npmjs.com/package/formik-tastic
+
+[license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
+
+[license]: ./LICENSE
