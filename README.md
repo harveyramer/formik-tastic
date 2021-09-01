@@ -2,7 +2,7 @@
 
 This package provides security updates and a TypeScript implementation of the [formik-json](https://www.npmjs.com/package/formik-tastic) package created by Flipbyte.
 
-WARNING: This is a pre-release version that is likely to contain bugs. Please use under advisement.
+**WARNING:** This is a pre-release version that is likely to contain bugs. Please use under advisement.
 
 
 [Developed by Harvey Ramer](https://www.harveyramer.com/)
