@@ -1,8 +1,12 @@
-import React, { StyleHTMLAttributes, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import { FileReference } from "typescript";
 import { FieldProps } from "./types";
 import { Properties } from "csstype";
+import { changeHandler } from "../utils";
+
+interface FileUpload extends File {
+  path: string;
+}
 
 const thumbsContainer: Properties = {
   display: "flex",
@@ -58,22 +62,6 @@ const rejectStyle: Properties = {
   borderColor: "#ff1744",
 };
 
-const prepareFileUploderOptions = (
-  { onDrop, onDropAccepted, onDropRejected, ...options }:any,
-  formik:any,
-  config:any
-) => {
-  options.onDrop = onDrop ? () => onDrop(formik, config) : null;
-  options.onDropAccepted = onDropAccepted
-    ? () => onDropAccepted(formik, config)
-    : null;
-  options.onDropRejected = onDropRejected
-    ? () => onDropRejected(formik, config)
-    : null;
-
-  return options;
-};
-
 const FileUploader = ({ config, formik, value, error }: FieldProps) => {
   const {
     name,
@@ -83,10 +71,34 @@ const FileUploader = ({ config, formik, value, error }: FieldProps) => {
     zoneActiveText,
     hasThumbs = false,
   } = config;
-  const { setFieldValue } = formik;
-  const selectedValue = value;
+
+  const { setFieldValue, setFieldError, handleBlur, setFieldTouched } = formik;
+  const prepareFileUploderOptions = (
+    { onDrop, onDropAccepted, onDropRejected, ...options }: any,
+    formik: any,
+    config: any
+  ) => {
+    options.onDrop = onDrop
+      ? onDrop.bind(this, formik, config)
+      : (accepted: any, rejected: any, uploadEvent: any) => {
+          setFieldTouched(name);
+          setFieldValue(name, accepted?.length ? accepted : null);
+          setFieldError(
+            name,
+            rejected?.length ? rejected[0].errors[0].message : null
+          );
+        };
+    options.onDropAccepted = onDropAccepted
+      ? onDropAccepted(formik, config)
+      : null;
+    options.onDropRejected = onDropRejected
+      ? onDropRejected(formik, config)
+      : null;
+    return options;
+  };
   const {
     acceptedFiles,
+    fileRejections,
     getRootProps,
     getInputProps,
     isDragActive,
@@ -105,9 +117,34 @@ const FileUploader = ({ config, formik, value, error }: FieldProps) => {
     }),
     [isDragActive, isDragReject]
   );
-
+  const filesEls = acceptedFiles.map((file: File) => {
+    return hasThumbs ? (
+      <div style={thumb} key={(file as FileUpload).path}>
+        <div style={thumbInner}>
+          <img src={URL.createObjectURL(file)} alt={file.type} style={img} />
+        </div>
+      </div>
+    ) : (
+      <li key={(file as FileUpload).path}>
+        {(file as FileUpload).path} - {file.size} bytes
+      </li>
+    );
+  });
+  const files = hasThumbs ? filesEls : <ul>{filesEls}</ul>;
+  const rejectsEls = fileRejections.map(
+    (uploadErr: { file: File; errors: any[] }) => {
+      return (
+        <li key={(uploadErr.file as FileUpload).path}>
+          {(uploadErr.file as FileUpload).path} - {uploadErr.file.size} bytes -{" "}
+          {uploadErr.errors.map((e) => e.message).join(", ")}
+        </li>
+      );
+    }
+  );
+  const rejects = <ul>{rejectsEls}</ul>;
   return (
-    <section>
+    <section className={"file-uploader" + (error ? " is-invalid " : "")}>
+      {JSON.stringify(error)}
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {isDragActive ? (
@@ -116,23 +153,19 @@ const FileUploader = ({ config, formik, value, error }: FieldProps) => {
           <p>Drag 'n' drop some files here, or click to select files</p>
         )}
       </div>
-      <aside style={thumbsContainer}>
-        {value &&
-          (hasThumbs ? (
-            value.map((file: any) => (
-              <div style={thumb} key={file.id}>
-                <div style={thumbInner}>
-                  <img src={file.url} alt={file.label} style={img} />
-                </div>
-              </div>
-            ))
-          ) : (
-            <ul>
-              {value.map((file: any) => (
-                <li key={file.id}>{file.url}</li>
-              ))}
-            </ul>
-          ))}
+      {fileRejections?.length ? (
+        <aside>
+          <h3>Errors</h3>
+          {rejects}
+        </aside>
+      ) : null}
+      <aside style={hasThumbs ? thumbsContainer : { display: "block" }}>
+        {acceptedFiles?.length ? (
+          <>
+            <h3>Files</h3>
+            {files}
+          </>
+        ) : null}
       </aside>
     </section>
   );

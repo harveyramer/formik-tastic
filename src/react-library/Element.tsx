@@ -59,7 +59,7 @@ const Element = ({
    * set that value for hasMounted => true
    */
   useEffect(() => {
-    setHasMounted((hasMounted) => {
+    setHasMounted((hasMounted:boolean) => {
       if (hasMounted) {
         return hasMounted;
       }
