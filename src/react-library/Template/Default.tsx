@@ -33,9 +33,9 @@ const Default = ({
   label,
   comment,
   error,
-  labelClass = "",
+  labelClass = "form-label",
   wrapAs = "div",
-  htmlClass = "form-group",
+  htmlClass = "mb-4",
   commentClass = "text-muted order-last",
   commentAs: CommentComponent = "small",
   errorClass,
@@ -52,24 +52,24 @@ const Default = ({
 
   return (
     <Component {...componentProps}>
-      {label && (
-        <Label htmlFor={name} className={labelClass}>
-          {label}
-        </Label>
-      )}
-      {children}
-      {comment &&
-        React.createElement(
-          CommentComponent,
-          { className: commentClass },
-          <>{comment}</>
+        {label && (
+          <Label htmlFor={name} className={labelClass}>
+            {label}
+          </Label>
         )}
-      <ErrorMessage
-        name={name}
-        error={error}
-        className={errorClass}
-        as={errorAs}
-      />
+        {children}
+        {comment &&
+          React.createElement(
+            CommentComponent,
+            { className: commentClass },
+            <>{comment}</>
+          )}
+        <ErrorMessage
+          name={name}
+          error={error}
+          className={errorClass}
+          as={errorAs}
+        />
     </Component>
   );
 };

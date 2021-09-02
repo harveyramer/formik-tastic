@@ -113,7 +113,7 @@ export const allAvailableFields = {
                     label: "Yes"
                     }
                 ],
-                formGroupClass: "form-group mb-4"
+                formGroupClass: "mb-4"
             },
             reactSelectMulti: {
                 type: "field",
@@ -136,7 +136,7 @@ export const allAvailableFields = {
                     label: 'Vanilla'
                     }
                 ],
-                formGroupClass: "form-group mb-4",
+                formGroupClass: "mb-4",
                 validation: [
                     ['array'
                     ],
@@ -161,7 +161,7 @@ export const allAvailableFields = {
                 components: {
                     DropdownIndicator: null
                 },
-                formGroupClass: "form-group mb-4",
+                formGroupClass: "mb-4",
                 validation: [
                     ['array'
                     ],

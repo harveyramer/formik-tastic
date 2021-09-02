@@ -9,13 +9,14 @@ const CodeEditor = ({ config, formik, value, error }:FieldProps) => {
     const {
         name,
         options,
-        defaultValue,
         attributes,
         fieldClass = ''
     } = config;
     const { setFieldValue, handleBlur } = formik;
     const selectedValue = value || '';
-
+    if (options?.mode) {
+        require(`codemirror/mode/${options.mode}/${options.mode}`);
+    }
     return (
         <CodeMirror
             id={ name }

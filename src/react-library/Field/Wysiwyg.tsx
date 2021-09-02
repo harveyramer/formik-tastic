@@ -1,26 +1,22 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
+import '../css/wysiwyg.css';
 import { changeHandler, setFieldValueWrapper } from '../utils';
 import { FieldProps } from './types';
 
 const Wysiwyg = ({ config, formik, value = '', error }:FieldProps) => {
     const [ showHtml, setShowHtml ] = useState(false);
-    const [ html, setHtml ] = useState('');
     const {
         name,
-        type,
         attributes,
         options,
-        rows,
         textareaClass = 'form-control'
     } = config;
     const { setFieldValue, handleChange, handleBlur } = formik;
     const toolbarOptions = _.assign({}, options ? options : Wysiwyg.defaultOptions);
-
     return (
-        <div className={`row ql-container-wysiwyg ql-container-wysiwyg-${name}` }>
+        <div className={`row ql-container-wysiwyg ql-container-wysiwyg-${name}`}>
             <div className="col-md-12 d-flex justify-content-end">
                 <button
                     type="button"
@@ -45,19 +41,20 @@ const Wysiwyg = ({ config, formik, value = '', error }:FieldProps) => {
                     value={ value }
                     className={ error ? ' is-invalid ' : '' }
                     onChange={
-                        () => changeHandler(setFieldValueWrapper(setFieldValue, name), formik, config, null)
+                        changeHandler.bind(this, setFieldValueWrapper(setFieldValue, name), formik, config)
                     }
                     { ...toolbarOptions }
-                    { ... attributes } />
+                    { ...attributes } />
                 }
                 { showHtml &&
                     <textarea
+                        {...attributes}
                         id={ 'ql-show-html-' + name }
                         name={ name }
                         className={ textareaClass }
                         rows={10}
                         value={ value }
-                        onChange={ (data) => changeHandler(handleChange, formik, config, data) }
+                        onChange={ changeHandler.bind(this, handleChange, formik, config) }
                     />
                 }
             </div>
@@ -89,12 +86,6 @@ Wysiwyg.defaultOptions = {
             matchVisual: false,
         },
     },
-    formats: [
-        'header', 'font', 'size',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image', 'video'
-    ]
 };
 
 export default React.memo(Wysiwyg);

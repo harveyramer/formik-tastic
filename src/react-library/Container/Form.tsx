@@ -10,7 +10,7 @@ const Form = ({ config }: { config: HTMLElementConfig }) => {
   const {
     name: containerName = "",
     elements,
-    htmlClass = "form-horizontal",
+    htmlClass = "container",
     comment,
     commentClass = "text-muted d-block mb-3",
   } = config;

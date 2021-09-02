@@ -4,7 +4,7 @@ import { ComponentProps } from "react";
 import Autosuggest from "react-autosuggest";
 import { changeHandler, setFieldValueWrapper } from "../utils";
 import { FieldProps } from "./types";
-// import '../css/autocomplete.css';
+import '../css/autocomplete.css';
 
 class Autocomplete extends Component {
   private autosuggestOptions: any;
