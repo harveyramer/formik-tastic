@@ -1,10 +1,10 @@
-import React, { useState, useEffect, ErrorInfo } from 'react';
-import { Field, useFormikContext } from 'formik';
-import withFormConfig from './withFormConfig';
-import { containers, fields, templates, FIELD } from './registry';
-import when from '@flipbyte/when-condition';
-import ErrorManager from './ErrorManager';
-import { FieldProps } from './Field/types';
+import React, { useState, useEffect, ErrorInfo } from "react";
+import { Field, useFormikContext } from "formik";
+import withFormConfig from "./withFormConfig";
+import { containers, fields, templates, FIELD } from "./registry";
+import when from "@flipbyte/when-condition";
+import ErrorManager from "./ErrorManager";
+import { FieldProps } from "./Field/types";
 
 /**
  * Render the element based on it's type and renderer
@@ -13,13 +13,13 @@ import { FieldProps } from './Field/types';
  * @param  {object} props
  * @return {Component}
  */
-const renderElement = ({ config, formik, value, error }:FieldProps) => {
-    const { type, renderer, wrapAs, ...rest } = config;
-    const registry = type === FIELD ? fields : containers;
-    const Renderer = typeof renderer === 'string' ? registry.get(renderer) : renderer;
+const renderElement = ({ config, formik, value, error }: FieldProps) => {
+  const { type, renderer, wrapAs, ...rest } = config;
+  const registry = type === FIELD ? fields : containers;
+  const Renderer = typeof renderer === "string" ? registry.get(renderer) : renderer;
 
-    return <Renderer config={{ type, ...rest }} formik={ formik } value={ value } error={ error } />
-}
+  return <Renderer config={{ type, ...rest }} formik={formik} value={value} error={error} />;
+};
 
 /**
  * Generic element renderer component that renders based on the type and renderer of the element
@@ -31,62 +31,48 @@ const renderElement = ({ config, formik, value, error }:FieldProps) => {
  * @param {object} formik
  * @param {object} rest
  */
-const ElementRenderer = ({
-    config,
-    validationSchema,
-    formik,
-    ...rest
-}:any) => {
-    const {
-        type,
-        name,
-        showWhen,
-        enabledWhen,
-        template
-    } = config;
-    const { values } = useFormikContext();
-    const [ canShow, setCanShow ] = useState(showWhen ? false : true);
-    const [ disabled, setDisabled ] = useState(enabledWhen ? true : false);
+const ElementRenderer = ({ config, validationSchema, formik, ...rest }: any) => {
+  const { type, name, showWhen, enabledWhen, template } = config;
+  const { values } = useFormikContext();
+  const [canShow, setCanShow] = useState(showWhen ? false : true);
+  const [disabled, setDisabled] = useState(enabledWhen ? true : false);
 
-    /**
-     * If the template is function, assuming it is a react component, use it
-     * Otherwise, consider it a string and try to fetch it, or the default component from the template registry
-     */
-    const Template = typeof template === 'function'
-        ? template
-        : templates.get(template || 'default');
+  /**
+   * If the template is function, assuming it is a react component, use it
+   * Otherwise, consider it a string and try to fetch it, or the default component from the template registry
+   */
+  const Template = typeof template === "function" ? template : templates.get(template || "default");
 
-    /**
-     * When the values have changed process conditions on fields,
-     * to decide whether to show and/or enable them or not.
-     */
-    useEffect(() => {
-        Promise.all([
-            showWhen ? when(showWhen, values) : true,
-            enabledWhen ? when(enabledWhen, values) : true
-        ]).then(([ canShow, enabled ]) => {
-            setCanShow(canShow);
-            setDisabled(!enabled);
-        })
-    }, [ values ]);
+  /**
+   * When the values have changed process conditions on fields,
+   * to decide whether to show and/or enable them or not.
+   */
+  useEffect(() => {
+    Promise.all([showWhen ? when(showWhen, values) : true, enabledWhen ? when(enabledWhen, values) : true]).then(([canShow, enabled]) => {
+      setCanShow(canShow);
+      setDisabled(!enabled);
+    });
+  }, [values]);
 
-    return !!type && canShow && (
-        type === FIELD
-            ? (
-                <Field name={ name }>
-                    {({ field: { value }}:any) => (
-                        <ErrorManager name={ name }>
-                            {(error:ErrorInfo) => (
-                                <Template disabled={ disabled } error={ error } { ...config }>
-                                    { renderElement({ config, formik, value, error }) }
-                                </Template>
-                            )}
-                        </ErrorManager>
-                    )}
-                </Field>
-            ) 
-            : renderElement({ config, formik })
-    );
-}
+  return (
+    !!type &&
+    canShow &&
+    (type === FIELD ? (
+      <Field name={name}>
+        {({ field: { value } }: any) => (
+          <ErrorManager name={name}>
+            {(error: ErrorInfo) => (
+              <Template disabled={disabled} error={error} {...config}>
+                {renderElement({ config, formik, value, error })}
+              </Template>
+            )}
+          </ErrorManager>
+        )}
+      </Field>
+    ) : (
+      renderElement({ config, formik })
+    ))
+  );
+};
 
 export default withFormConfig(ElementRenderer);
