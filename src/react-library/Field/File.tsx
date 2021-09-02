@@ -3,16 +3,7 @@ import { changeHandler } from "../utils";
 import { FieldProps } from "./types";
 
 const File = ({ config, formik, value = "", error }: FieldProps) => {
-  const {
-    name,
-    type,
-    attributes,
-    fieldType,
-    defaultValue,
-    icon,
-    fieldClass = "form-control",
-    inputGroupClass = "input-group",
-  } = config;
+  const { name, type, attributes, fieldType, defaultValue, icon, fieldClass = "form-control", inputGroupClass = "input-group" } = config;
 
   const { handleChange, handleBlur, setFieldValue } = formik;
   const isInputGroup = icon ? true : false;
@@ -40,8 +31,8 @@ const File = ({ config, formik, value = "", error }: FieldProps) => {
       type="file"
       className={fieldClass + (error ? " is-invalid " : "")}
       value={value}
-      onChange={(event:Event) => {
-        setFieldValue(name, (event.currentTarget as any).files[0]);
+      onChange={(event: Event) => {
+        setFieldValue(name, (event.currentTarget as any).files);
       }}
       onBlur={handleBlur}
       {...attributes}
