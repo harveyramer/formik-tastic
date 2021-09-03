@@ -3,24 +3,44 @@ import { changeHandler } from "../utils";
 import { FieldProps } from "./types";
 
 const File = ({ config, formik, value = "", error }: FieldProps) => {
-  const { name, type, attributes, fieldType, defaultValue, icon, fieldClass = "form-control", inputGroupClass = "input-group" } = config;
+  const {
+    name,
+    options,
+    attributes,
+    fieldType,
+    defaultValue,
+    icon,
+    fieldClass = "form-control",
+    inputGroupClass = "input-group",
+  } = config;
 
   const { handleChange, handleBlur, setFieldValue } = formik;
   const isInputGroup = icon ? true : false;
-
+  const prepareFileUploderOptions = (
+    { onChange, ...options }: any,
+    formik: any,
+    config: any
+  ) => {
+    options.onChange = onChange
+      ? onChange.bind(this, formik, config)
+      : (event: Event) => {
+        setFieldValue(name, Array.from((event.target as any).files as File[]).map((f:File) => f.name));
+      };
+    return options;
+  };
+  const opts = {  ...prepareFileUploderOptions({ ...options }, formik, config)};
   return isInputGroup ? (
     <div className={inputGroupClass}>
-      <span className="input-group-File">
+      <span className="input-group-text">
         <i className={icon}></i>
       </span>
       <input
         id={name}
         name={name}
-        type={fieldType}
+        type="file"
         className={fieldClass + (error ? " is-invalid " : "")}
-        value={value}
-        onChange={(data) => changeHandler(handleChange, formik, config, data)}
         onBlur={handleBlur}
+        {...opts}
         {...attributes}
       />
     </div>
@@ -30,11 +50,8 @@ const File = ({ config, formik, value = "", error }: FieldProps) => {
       name={name}
       type="file"
       className={fieldClass + (error ? " is-invalid " : "")}
-      value={value}
-      onChange={(event: Event) => {
-        setFieldValue(name, (event.currentTarget as any).files);
-      }}
       onBlur={handleBlur}
+      {...opts}
       {...attributes}
     />
   );

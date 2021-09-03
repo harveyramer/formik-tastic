@@ -81,12 +81,7 @@ const FileUploader = ({ config, formik, value, error }: FieldProps) => {
     options.onDrop = onDrop
       ? onDrop.bind(this, formik, config)
       : (accepted: any, rejected: any, uploadEvent: any) => {
-          setFieldTouched(name);
-          setFieldValue(name, accepted?.length ? accepted : null);
-          setFieldError(
-            name,
-            rejected?.length ? rejected[0].errors[0].message : null
-          );
+          setFieldValue(name, (accepted as File[]).map((f:File) => f.name));
         };
     options.onDropAccepted = onDropAccepted
       ? onDropAccepted(formik, config)
@@ -144,7 +139,6 @@ const FileUploader = ({ config, formik, value, error }: FieldProps) => {
   const rejects = <ul>{rejectsEls}</ul>;
   return (
     <section className={"file-uploader" + (error ? " is-invalid " : "")}>
-      {JSON.stringify(error)}
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {isDragActive ? (
