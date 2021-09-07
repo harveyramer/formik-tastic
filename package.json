@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/harveyramer/formik-tastic.git"
   },
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@flipbyte/when-condition": "^0.6.0",
-    "@flipbyte/yup-schema": "^0.1.5",
+    "yup-schema": "^1.0.0-alpha.2",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@types/codemirror": "^5.60.2",
     "@types/quill": "^2.0.9",

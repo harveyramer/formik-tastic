@@ -49,7 +49,6 @@ const FormikForm = ({ onUpdate, schema, ...formik }: FormInitProps) => {
   return <Element config={schema} />;
 };
 
-
 const Form = React.forwardRef<Element, FormInitProps>(
   (
     { schema, onUpdate = () => {}, initialValues = {}, ...rest }: any,
@@ -89,7 +88,9 @@ const Form = React.forwardRef<Element, FormInitProps>(
     return (
       <SchemaProvider value={{ validationSchema, schema }}>
         <Formik {...formProps} innerRef={ref}>
-          {(props: FormInitProps) => <FormikForm {...props} schema={schema} onUpdate={onUpdate} />}
+          {(props: FormInitProps) => (
+            <FormikForm {...props} schema={schema} onUpdate={onUpdate} />
+          )}
         </Formik>
       </SchemaProvider>
     );
