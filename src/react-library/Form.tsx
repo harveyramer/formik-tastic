@@ -21,7 +21,7 @@ import {
 import Element from "./Element";
 import { SchemaProvider } from "./withFormConfig";
 import { prepareValidationSchema } from "./utils";
-import Rules from "@flipbyte/yup-schema";
+import Rules from "yup-schema";
 
 export type FormInitProps = {
   onUpdate?: (values: any, formikHelpers?: FormikHelpers<any>) => void;

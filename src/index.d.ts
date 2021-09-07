@@ -1,4 +1,4 @@
-declare module '@flipbyte/yup-schema';
+declare module 'yup-schema';
 declare module '@flipbyte/when-condition';
 declare module 'shallowequal';
 declare module 'react-autosuggest';
