@@ -13,6 +13,7 @@ import CodeEditor from "./CodeEditor";
 import ReactSelect from "./ReactSelect";
 import FileUploader from "./FileUploader";
 import Autocomplete from "./Autocomplete";
+import HTML from "./HTML";
 
 ["text", "email", "password", "number", "url", "date"].map((type) => registerField(type, Text));
 
@@ -28,3 +29,4 @@ registerField("code-editor", CodeEditor);
 registerField("react-select", ReactSelect);
 registerField("autocomplete", Autocomplete);
 registerField("file-uploader", FileUploader);
+registerField('html', HTML);

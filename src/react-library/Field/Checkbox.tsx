@@ -19,15 +19,17 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
   return options.map(
     ({ value, label }: HTMLOptionElement, key: string, index: number) => {
       const fieldName = _.kebabCase(name + " " + value);
+      const fieldValue = `${value}:${label}`;
       return (
         <div key={key} className={formCheckClass}>
           <label htmlFor={fieldName} className={formCheckLabelClass}>
             <input
               id={fieldName}
               name={`${name}.${key}`}
+              value={fieldValue}
               className={fieldClass + (error ? " is-invalid " : "")}
               type="checkbox"
-              checked={checkboxValue[key] || false}
+              checked={checkboxValue[key]?.length || false}
               onChange={(event) => {
                 changeHandler(handleChange, formik, config, event);
                 handleBlur(event);
