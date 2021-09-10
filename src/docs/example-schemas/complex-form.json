@@ -1,0 +1,563 @@
+{
+  "schema": {
+    "id": "all-available-fields",
+    "label": "All available fields",
+    "type": "container",
+    "renderer": "form",
+    "elements": {
+      "intro": {
+        "type": "container",
+        "renderer": "div",
+        "elements": {
+          "list": {
+            "type": "container",
+            "as": "ol",
+            "renderer": "html-tag",
+            "elements": {
+              "item1": {
+                "type": "field",
+                "renderer": "html",
+                "template": "html",
+                "as": "li",
+                "htmlString": "Fill out the order form and submit it."
+              },
+              "item2": {
+                "type": "field",
+                "renderer": "html",
+                "template": "html",
+                "as": "li",
+                "htmlString": "Event invitations staff will send a proof and mail list via email."
+              },
+              "item3": {
+                "type": "field",
+                "renderer": "html",
+                "template": "html",
+                "as": "li",
+                "htmlString": "Edit the mail list and request any changes to your proof via email."
+              },
+              "item4": {
+                "type": "field",
+                "renderer": "html",
+                "template": "html",
+                "as": "li",
+                "htmlString": "Once you are satisfied with the proof, please email your written approval of the order."
+              }
+            }
+          }
+        }
+      },
+      "notice": {
+        "type": "field",
+        "renderer": "html",
+        "template": "html",
+        "as": "p",
+        "htmlClass": "text-danger fw-bold",
+        "htmlString": "Please Note: changes cannot be made once we receive final approval."
+      },
+      "productOptions": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Product Options",
+        "collapsible": false,
+        "elements": {
+          "dinnerEventInvitations": {
+            "type": "field",
+            "renderer": "checkbox",
+            "name": "productOptions",
+            "htmlClass": "mb-0",
+            "options": [
+              {
+                "label": "Yes, I want dinner event invitations",
+                "value": "dinnerEventInvitations"
+              },
+              {
+                "label": "Yes, I want unaddressed invitations",
+                "value": "unaddressedEventInvitations"
+              },
+              {
+                "label": "Yes, I want the reminder postcard (reminds people about the event 2–2½ weeks in advance).",
+                "value": "dinnerEventPostcard"
+              }
+            ]
+          },
+          "unaddressedInvitationQuantity": {
+            "type": "field",
+            "renderer": "number",
+            "label": "Quantity of unaddressed invitations (Increments of 25; does NOT include postage)",
+            "name": "unaddressedInvitationQuantity",
+            "htmlClass": "mt-4",
+            "showWhen": [
+              "is",
+              "productOptions[1][0]",
+              "unaddressedEventInvitations:Yes, I want unaddressed invitations"
+            ]
+          }
+        }
+      },
+      "chapterInfo": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Chapter Information",
+        "collapsible": false,
+        "elements": {
+          "dinnerEventInvitations": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Chapter Number",
+            "name": "chapterNumber"
+          },
+          "eventCode": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Chapter Event Code",
+            "name": "eventCode"
+          },
+          "chapterName": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Chapter Name",
+            "name": "chapterName"
+          },
+          "regionalDirector": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Regional Director",
+            "name": "regionalDirector"
+          }
+        }
+      },
+      "returnAddress": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Chapter Return Address",
+        "collapsible": false,
+        "elements": {
+          "row1": {
+            "type": "container",
+            "htmlClass": "row",
+            "renderer": "div",
+            "elements": {
+              "streetAddress": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Street Address",
+                "name": "streetAddress",
+                "htmlClass": "col"
+              }
+            }
+          },
+          "row2": {
+            "type": "container",
+            "htmlClass": "row",
+            "renderer": "div",
+            "elements": {
+              "city": {
+                "type": "field",
+                "renderer": "text",
+                "label": "City",
+                "name": "city",
+                "htmlClass": "col"
+              },
+              "state": {
+                "type": "field",
+                "renderer": "text",
+                "label": "State",
+                "name": "state",
+                "htmlClass": "col"
+              },
+              "zip": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Zip",
+                "name": "zip",
+                "htmlClass": "col"
+              }
+            }
+          }
+        }
+      },
+      "contactInformation": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Chapter Contact Information",
+        "collapsible": false,
+        "elements": {
+          "row1": {
+            "type": "container",
+            "htmlClass": "row",
+            "renderer": "div",
+            "elements": {
+              "name": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Name",
+                "name": "name",
+                "htmlClass": "col"
+              }
+            }
+          },
+          "row2": {
+            "type": "container",
+            "htmlClass": "row",
+            "renderer": "div",
+            "elements": {
+              "phone": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Phone",
+                "name": "phone",
+                "htmlClass": "col"
+              },
+              "email": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Email",
+                "name": "email",
+                "htmlClass": "col"
+              }
+            }
+          }
+        }
+      },
+      "eventInformation": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Event Information",
+        "collapsible": false,
+        "elements": {
+          "eventTitle": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Event Title",
+            "name": "eventTitle"
+          },
+          "eventDate": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Event Date",
+            "name": "eventDate"
+          },
+          "eventFacilityName": {
+            "type": "field",
+            "renderer": "text",
+            "label": "Event Facility Name",
+            "name": "eventFacilityName"
+          },
+          "eventFacilityAddress": {
+            "type": "container",
+            "renderer": "fieldset",
+            "title": "Event Facility Address",
+            "collapsible": false,
+            "elements": {
+              "row1": {
+                "type": "container",
+                "htmlClass": "row",
+                "renderer": "div",
+                "elements": {
+                  "streetAddress": {
+                    "type": "field",
+                    "renderer": "text",
+                    "label": "Street Address",
+                    "name": "eventFacilityStreetAddress",
+                    "htmlClass": "col"
+                  }
+                }
+              },
+              "row2": {
+                "type": "container",
+                "htmlClass": "row",
+                "renderer": "div",
+                "elements": {
+                  "city": {
+                    "type": "field",
+                    "renderer": "text",
+                    "label": "City",
+                    "name": "eventFacilityCity",
+                    "htmlClass": "col"
+                  },
+                  "state": {
+                    "type": "field",
+                    "renderer": "text",
+                    "label": "State",
+                    "name": "eventFacilityState",
+                    "htmlClass": "col"
+                  },
+                  "zip": {
+                    "type": "field",
+                    "renderer": "text",
+                    "label": "Zip",
+                    "name": "eventFacilityZip",
+                    "htmlClass": "col"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "schedule": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Schedule of Events",
+        "collapsible": false,
+        "cardBodyClass": "card-body row-cols-2 row",
+        "elements": {
+          "doorsOpen": {
+            "type": "field",
+            "renderer": "text",
+            "name": "doorsOpen",
+            "label": "Doors Open Time",
+            "htmlClass": "col"
+          },
+          "cocktails": {
+            "type": "field",
+            "renderer": "text",
+            "name": "cocktails",
+            "label": "Cocktails Served Time",
+            "htmlClass": "col"
+          },
+          "dinner": {
+            "type": "field",
+            "renderer": "text",
+            "name": "dinner",
+            "label": "Dinner Time",
+            "htmlClass": "col"
+          },
+          "auction": {
+            "type": "field",
+            "renderer": "text",
+            "name": "auction",
+            "label": "Auction Time",
+            "htmlClass": "col"
+          }
+        }
+      },
+      "earlyBirdPricing": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Early Bird Pricing",
+        "collapsible": false,
+        "elements": {
+          "earlyBirdDeadline": {
+            "type": "field",
+            "renderer": "text",
+            "name": "earlyBirdDeadline",
+            "label": "Early Bird Deadline (MM/DD/YYY)",
+            "htmlClass": "col"
+          },
+          "earlyBirdPricingContainer": {
+            "type": "container",
+            "renderer": "div",
+            "htmlClass": "row-cols-2 row",
+            "elements": {
+              "single": {
+                "type": "field",
+                "renderer": "text",
+                "name": "ebSingle",
+                "label": "Single",
+                "htmlClass": "col"
+              },
+              "couple": {
+                "type": "field",
+                "renderer": "text",
+                "name": "ebCouple",
+                "label": "Couple",
+                "htmlClass": "col"
+              },
+              "greenwing": {
+                "type": "field",
+                "renderer": "text",
+                "name": "ebGreenwing",
+                "label": "Greenwing",
+                "htmlClass": "col"
+              },
+              "sponsor": {
+                "type": "field",
+                "renderer": "text",
+                "name": "ebSponsor",
+                "label": "Sponsor",
+                "htmlClass": "col"
+              },
+              "sponsorCouple": {
+                "type": "field",
+                "renderer": "text",
+                "name": "ebSponsorCouple",
+                "label": "Sponsor Couple",
+                "htmlClass": "col"
+              },
+              "corporateTable": {
+                "type": "field",
+                "renderer": "text",
+                "name": "ebCorporateTable",
+                "label": "Corporate Table",
+                "htmlClass": "col"
+              }
+            }
+          }
+        }
+      },
+      "regularPricing": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Regular Ticket Pricing",
+        "collapsible": false,
+        "cardBodyClass": "card-body row-cols-2 row",
+        "elements": {
+          "single": {
+            "type": "field",
+            "renderer": "text",
+            "name": "regSingle",
+            "label": "Single",
+            "htmlClass": "col"
+          },
+          "couple": {
+            "type": "field",
+            "renderer": "text",
+            "name": "regCouple",
+            "label": "Couple",
+            "htmlClass": "col"
+          },
+          "greenwing": {
+            "type": "field",
+            "renderer": "text",
+            "name": "regGreenwing",
+            "label": "Greenwing",
+            "htmlClass": "col"
+          },
+          "sponsor": {
+            "type": "field",
+            "renderer": "text",
+            "name": "regSponsor",
+            "label": "Sponsor",
+            "htmlClass": "col"
+          },
+          "sponsorCouple": {
+            "type": "field",
+            "renderer": "text",
+            "name": "regSponsorCouple",
+            "label": "Sponsor Couple",
+            "htmlClass": "col"
+          },
+          "corporateTable": {
+            "type": "field",
+            "renderer": "text",
+            "name": "regCorporateTable",
+            "label": "Corporate Table",
+            "htmlClass": "col"
+          }
+        }
+      },
+      "chapterMessage": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Chapter Message (optional)",
+        "comment": "If left blank, default message will be used.",
+        "collapsible": false,
+        "elements": {
+          "message": {
+            "type": "field",
+            "renderer": "textarea",
+            "name": "chapterMessage",
+            "label": ""
+          }
+        }
+      },
+      "listOptions": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "List Options",
+        "collapsible": false,
+        "elements": {
+          "dinnerEventInvitations": {
+            "type": "field",
+            "renderer": "radio",
+            "name": "listOptions",
+            "htmlClass": "mb-0",
+            "options": [
+              {
+                "label": "Standard List Pull",
+                "value": "standardListPull",
+                "comment": "Includes a 2 year pull of DU members who have had transactions with this event/chapter or have been assigned to your chapter’s zip code range."
+              },
+              {
+                "label": "Standard List Pull with HQPs",
+                "value": "standardListPullWithHQPs",
+                "comment": "High Quality Prospect (HQP) is a waterfowl hunter who is not a current DU member. HQP information is obtained from a variety of data resources including hunting license databases. "
+              },
+              {
+                "label": "Request Special List Pull ",
+                "value": "specialListPull",
+                "comment": "Select if you would like to add additional chapters or zip codes to your mail list.  Please note: Special List Pulls will include the same criteria as our Standard Pull unless specified."
+              }
+            ]
+          }
+        }
+      },
+      "mailingOptions": {
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Mailing Options",
+        "collapsible": false,
+        "elements": {
+          "dinnerEventInvitations": {
+            "type": "field",
+            "renderer": "radio",
+            "name": "listOptions",
+            "htmlClass": "mb-0",
+            "options": [
+              {
+                "label": "Invitations mailed first-class directly to invitees.",
+                "value": "directMail"
+              },
+              {
+                "label": "Invitations shipped (unsealed) with first-class postage to committee for local mailing.",
+                "value": "committeeWithPostage"
+              },
+              {
+                "label": "Invitations shipped (unsealed) without postage to committee for local mailing.",
+                "value": "committeeNoPostage"
+              }
+            ]
+          }
+        }
+      },
+      "fileUploader": {
+        "name": "fileUploader",
+        "label": "File Uploader",
+        "type": "field",
+        "renderer": "file-uploader",
+        "options": {
+          "multiple": false,
+          "accept": ["image/*"]
+        },
+        "validation": [["array"], ["required"], ["max", 2]]
+      },
+      "upload": {
+        "name": "uploadFiles",
+        "label": "Upload",
+        "type": "field",
+        "renderer": "file",
+        "attributes": {
+          "multiple": true
+        },
+        "icon": "fas fa-upload",
+        "validation": [["array"], ["required"], ["max", 2]]
+      },
+      "buttonsGroup": {
+        "type": "container",
+        "renderer": "button-group",
+        "buttonsContainerClass": "buttons-container mt-2",
+        "elements": {
+          "save": {
+            "type": "field",
+            "renderer": "button",
+            "name": "save",
+            "content": "Save",
+            "fieldClass": "btn-success float-end",
+            "buttonType": "submit"
+          }
+        }
+      }
+    }
+  }
+}
