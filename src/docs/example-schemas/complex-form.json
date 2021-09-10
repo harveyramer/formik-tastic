@@ -480,11 +480,6 @@
                 "comment": "Includes a 2 year pull of DU members who have had transactions with this event/chapter or have been assigned to your chapter’s zip code range."
               },
               {
-                "label": "Standard List Pull with HQPs",
-                "value": "standardListPullWithHQPs",
-                "comment": "High Quality Prospect (HQP) is a waterfowl hunter who is not a current DU member. HQP information is obtained from a variety of data resources including hunting license databases. "
-              },
-              {
                 "label": "Request Special List Pull ",
                 "value": "specialListPull",
                 "comment": "Select if you would like to add additional chapters or zip codes to your mail list.  Please note: Special List Pulls will include the same criteria as our Standard Pull unless specified."
