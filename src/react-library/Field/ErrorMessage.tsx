@@ -12,7 +12,7 @@ const ErrorMessage = ({
     className: string,
     as: any,
 }) => error && (
-    <Component className={ className }>{name} { error }</Component>
+    <Component className={ className }>{ error }</Component>
 );
 
 export default React.memo(ErrorMessage);
