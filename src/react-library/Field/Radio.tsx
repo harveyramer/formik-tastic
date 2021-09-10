@@ -2,6 +2,11 @@ import React from 'react';
 import { changeHandler } from '../utils';
 import { FieldProps } from './types';
 
+interface OptionWithComment extends HTMLOptionElement {
+    comment: string;
+    commentClass: string;
+  }
+
 const Radio = ({ config, formik, value, error }:FieldProps) => {
     const {
         name,
@@ -14,21 +19,21 @@ const Radio = ({ config, formik, value, error }:FieldProps) => {
     } = config;
     const { handleChange, handleBlur } = formik;
 
-    return options.map(( option:HTMLOptionElement ) => (
-        <div className={ formCheckClass } key={ option.value }>
-            <label htmlFor={ name + '_' + option.value } className={ formCheckLabelClass }>
+    return options.map(({ value:optionValue, label, comment, commentClass = 'd-block' }:OptionWithComment ) => (
+        <div className={ formCheckClass } key={ optionValue }>
+            <label htmlFor={ name + '_' + optionValue } className={ formCheckLabelClass }>
                 <input
                     name={ name }
                     type="radio"
                     className={ fieldClass + ( error ? ' is-invalid ' : '' ) }
-                    id={ name + '_' + option.value }
-                    value={ option.value }
-                    defaultChecked={ value == option.value }
+                    id={ name + '_' + optionValue }
+                    value={ optionValue }
+                    defaultChecked={ value == optionValue }
                     onChange={ event => {
                         changeHandler(handleChange, formik, config, event);
                         handleBlur(event);
                     }}
-                    { ...attributes } /> { option.title }
+                    { ...attributes } /> { label } {comment && <small className={commentClass}>{comment}</small>}
             </label>
         </div>
     ));

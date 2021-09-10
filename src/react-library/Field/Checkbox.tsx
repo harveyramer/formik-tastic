@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import { changeHandler } from "../utils";
 import { FieldProps } from "./types";
 
+interface OptionWithComment extends HTMLOptionElement {
+  comment: string;
+  commentClass: string;
+}
+
 const Checkbox = ({ config, formik, value, error }: FieldProps) => {
   const {
     name,
@@ -17,7 +22,7 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
   const { handleChange, handleBlur } = formik;
   const checkboxValue = value || [];
   return options.map(
-    ({ value, label }: HTMLOptionElement, key: string, index: number) => {
+    ({ value, label, comment, commentClass = 'd-block' }: OptionWithComment, key: string, index: number) => {
       const fieldName = _.kebabCase(name + " " + value);
       const fieldValue = `${value}:${label}`;
       return (
@@ -36,7 +41,7 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
               }}
               {...attributes}
             />{" "}
-            {label}
+            {label} {comment && <small className={commentClass}>{comment}</small>}
           </label>
         </div>
       );
