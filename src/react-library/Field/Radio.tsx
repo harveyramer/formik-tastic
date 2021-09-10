@@ -17,7 +17,6 @@ const Radio = ({ config, formik, value, error }:FieldProps) => {
         formCheckLabelClass = 'form-check-label',
     } = config;
     const { handleChange, handleBlur } = formik;
-    console.log(name, config);
     return options.map(({ value:optionValue, label, comment, commentClass = 'd-block' }:OptionWithComment ) => (
         <div className={ formCheckClass } key={ optionValue }>
             <label htmlFor={ name + '_' + optionValue } className={ formCheckLabelClass }>
