@@ -5,18 +5,14 @@ import { FieldProps } from "./types";
 const Text = ({ config, formik, value = "", error }: FieldProps) => {
   const {
     name,
-    type,
     attributes,
     fieldType,
-    defaultValue,
     icon,
     fieldClass = "form-control",
     inputGroupClass = "input-group",
   } = config;
-
   const { handleChange, handleBlur } = formik;
   const isInputGroup = icon ? true : false;
-
   return isInputGroup ? (
     <div className={inputGroupClass}>
       <span className="input-group-text">
