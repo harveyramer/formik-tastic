@@ -497,7 +497,7 @@
           "dinnerEventInvitations": {
             "type": "field",
             "renderer": "radio",
-            "name": "listOptions",
+            "name": "mailingOptions",
             "htmlClass": "mb-0",
             "options": [
               {
