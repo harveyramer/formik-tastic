@@ -1,9 +1,13 @@
 import { Component, ErrorInfo, MouseEventHandler } from "react";
 
+interface Indexable {
+  [key: string]: unknown
+}
+
 export type FieldProps = {
   config?: any,
   formik?: any,
-  value?: any,
+  value?: any | Indexable,
   error?: ErrorInfo
 }
 export type ButtonProps = {
