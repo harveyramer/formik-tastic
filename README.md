@@ -5,7 +5,7 @@ This package provides security updates and a TypeScript implementation of the [f
 **WARNING:** This is a pre-release version that is likely to contain bugs. Please use under advisement.
 
 
-[Developed by Harvey Ramer](https://www.harveyramer.com/)
+[Converted to TypeScript and maintained by Harvey Ramer](https://www.harveyramer.com/)
 
 [![npm package][npm-badge]][npm]
 [![license][license-badge]][license]
