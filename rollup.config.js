@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'test') {
     input: './src/react-library/index.tsx',
     "output": {
       "file": "lib/index.js",
-      "format": "esm",
+      "format": "cjs",
       "sourcemap": true
     },
     external: [
