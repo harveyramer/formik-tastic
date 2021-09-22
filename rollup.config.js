@@ -13,8 +13,9 @@ if (process.env.NODE_ENV === 'test') {
   config = {
     input: './src/react-library/index.tsx',
     "output": {
-      "file": "lib/index.js",
-      "format": "cjs",
+      "file": "./lib/index.js",
+      "format": "umd",
+      "name":"index",
       "sourcemap": true
     },
     external: [
