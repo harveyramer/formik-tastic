@@ -8,9 +8,9 @@ const Button = ({ config, formik }: FieldProps) => {
     buttonType,
     onClick,
     validationErrorClass = "text-danger d-block",
-    validationErrorMessage = "Fix any errors before you continue.",
-    disableOnInvalid = true,
-    errorOnInvalid = true,
+    validationErrorMessage = "Some fields are not valid.",
+    disableOnInvalid = false,
+    showErrorOnInvalid = true,
   } = config;
   const { isSubmitting, isValid, errors } = formik;
 
@@ -25,7 +25,7 @@ const Button = ({ config, formik }: FieldProps) => {
   }
   return (
     <>
-      {errorOnInvalid && !isValid && !isEmpty(errors) && (
+      {showErrorOnInvalid && !isValid && !isEmpty(errors) && (
         <small className={validationErrorClass}>
           {validationErrorMessage}
         </small>
