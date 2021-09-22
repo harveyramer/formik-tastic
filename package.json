@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/harveyramer/formik-tastic.git"
   },
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -34,9 +34,12 @@
   "dependencies": {
     "@flipbyte/when-condition": "^0.6.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@rollup/plugin-inject": "^4.0.2",
     "codemirror": "^5.62.3",
     "csstype": "^3.0.8",
     "formik": "^2.2.9",
+    "lodash": "^4.17.21",
+    "prop-types": "15.7.2",
     "react-autosuggest": "^10.1.0",
     "react-codemirror2": "^7.2.1",
     "react-dropzone": "^11.3.4",
@@ -45,9 +48,7 @@
     "react-sortable-hoc": "^2.0.0",
     "react-switch": "^6.0.0",
     "shallowequal": "^1.1.0",
-    "prop-types": "15.7.2",
-    "yup-schema": "^1.0.0-alpha.2",
-    "lodash": "^4.17.21"
+    "yup-schema": "^1.0.0-alpha.2"
   },
   "peerDependencies": {
     "react": "^17.0.2",
@@ -59,7 +60,6 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "react-scripts": "^4.0.3",
     "@types/codemirror": "^5.60.2",
     "@types/jest": "^26.0.15",
     "@types/lodash": "^4.14.172",
@@ -68,7 +68,9 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "postcss": "^8.3.6",
+    "react-scripts": "^4.0.3",
     "rollup": "^2.56.3",
+    "rollup-jest": "^1.1.2",
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-typescript2": "^0.30.0",
     "tslib": "^2.3.1",
@@ -86,5 +88,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx|js|jsx)?$": [
+        "rollup-jest",
+        {
+          "configFile": "./rollup.config.js"
+        }
+      ]
+    }
   }
 }
