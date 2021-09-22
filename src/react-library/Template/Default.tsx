@@ -6,7 +6,6 @@ import React, {
 } from "react";
 import Label from "../Field/Label";
 import ErrorMessage from "../Field/ErrorMessage";
-import { ReactNode } from "react";
 
 const styles = (disabled: boolean) =>
   disabled ? { pointerEvents: "none", opacity: 0.6 } : {};

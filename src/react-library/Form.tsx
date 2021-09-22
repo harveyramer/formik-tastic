@@ -3,19 +3,9 @@ import React, {
   useEffect,
   useCallback,
   useState,
-  RefObject,
-  ReactNode,
-  ForwardedRef,
-  MutableRefObject,
-  PropsWithChildren,
-  ForwardRefExoticComponent,
-  RefAttributes,
 } from "react";
 import {
   Formik,
-  FormikProps,
-  FormikValues,
-  FormikFormProps,
   FormikHelpers,
 } from "formik";
 import Element from "./Element";
@@ -39,7 +29,7 @@ export type FormInitProps = {
 
 const FormikForm = ({ onUpdate, schema, ...formik }: FormInitProps) => {
   /**
-   * Callback if provided will be vcalled when form values change
+   * Callback if provided will be called when form values change
    */
   useEffect(() => {
     if (typeof onUpdate === "function") {

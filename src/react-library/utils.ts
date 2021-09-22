@@ -3,7 +3,8 @@ import when from '@flipbyte/when-condition';
 import { FIELD } from './registry';
 import { FormikProps } from 'formik';
 import { Indexable } from './types';
-import { SyntheticEvent } from 'react';
+
+export const isEmpty = (obj:any) => !obj || !Object.keys(obj).some(x => obj[x] !== void 0);
 
 export const setFieldValueWrapper = (setFieldValue: Function, name: string) => (value: any) => setFieldValue(name, value);
 export const joinNames = (...args: any[]) => _.join(_.filter(args, arg => (_.isString(arg) && arg) || _.isInteger(arg)), '.')
