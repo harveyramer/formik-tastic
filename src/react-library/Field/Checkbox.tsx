@@ -19,7 +19,7 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
     fieldClass = "form-check-input",
     formCheckLabelClass = "form-check-label",
   } = config;
-  const { handleChange, handleBlur } = formik;
+  const { handleChange } = formik;
   return options.map(
     ({ value:val, label, comment, commentClass = 'd-block' }: OptionWithComment, key: string, index: number) => {
       const fieldName = _.kebabCase(name + " " + val);
@@ -37,7 +37,6 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
               checked={isChecked}
               onChange={(event) => {
                 changeHandler(handleChange, formik, config, event);
-                handleBlur(event);
               }}
               {...attributes}
             />{" "}

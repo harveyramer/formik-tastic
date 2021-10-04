@@ -58,6 +58,10 @@ import { Form } from 'formik-tastic';
             "name": "save",
             "label": "Save",
             "htmlClass": "btn-success",
+            "validationErrorClass": "text-danger d-block", // default
+            "validationErrorMessage": "Some fields are not valid.", // default
+            "showErrorOnInvalid":true, // defaults to false
+            "disableOnInvalid": true, // defaults to false
             "buttonType": "submit"
         },
         "main": {

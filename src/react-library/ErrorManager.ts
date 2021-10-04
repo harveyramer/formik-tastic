@@ -21,14 +21,11 @@ import { useFormikContext } from 'formik';
  * @param {function} children
  */
 const ErrorManager = ({ name, children }:any) => {
-    // Set submitCount on initial mount.
-    const formik = useFormikContext();
-    const { submitCount: formikSubmitCount, isSubmitting, errors, touched } = useFormikContext();
+    const { submitCount: formikSubmitCount, isSubmitting, errors, touched, values } = useFormikContext();
     const [ submitCount ] = useState(isSubmitting ? formikSubmitCount - 1 : formikSubmitCount);
     const isTouched = _.get(touched, name);
     const errorMessage = _.get(errors, name);
     const error = !_.isEmpty(errorMessage) && (isTouched || formikSubmitCount > submitCount) ? errorMessage : false;
-
     return children(error);
 };
 

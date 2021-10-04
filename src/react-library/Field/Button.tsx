@@ -10,7 +10,7 @@ const Button = ({ config, formik }: FieldProps) => {
     validationErrorClass = "text-danger d-block",
     validationErrorMessage = "Some fields are not valid.",
     disableOnInvalid = false,
-    showErrorOnInvalid = true,
+    showErrorOnInvalid = false,
   } = config;
   const { isSubmitting, isValid, errors } = formik;
 

@@ -33,7 +33,7 @@ export const changeHandler = (handler: ((data: any) => void), formikProps: Formi
  * @return {array}
  */
 export const prepareValidationSchema = (schema: Indexable): any => {
-    const { type, elements, name, renderer, validation, prefixNameToElement = false } = schema;
+    const { type, elements, name, renderer, validation } = schema;
     if (type === FIELD && validation) {
         return {
             [name]: validation
