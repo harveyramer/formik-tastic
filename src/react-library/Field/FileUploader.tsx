@@ -62,16 +62,14 @@ const rejectStyle: Properties = {
   borderColor: "#ff1744",
 };
 
-const FileUploader = ({ config, formik, value, error }: FieldProps) => {
+const FileUploader = ({ config, formik, error }: FieldProps) => {
   const {
     name,
     options,
     placeholder,
-    disabledText,
     zoneActiveText,
     hasThumbs = false,
   } = config;
-
   const { setFieldValue, setFieldError, handleBlur, setFieldTouched } = formik;
   const prepareFileUploderOptions = (
     { onDrop, onDropAccepted, onDropRejected, ...options }: any,

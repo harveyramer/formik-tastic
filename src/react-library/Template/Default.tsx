@@ -11,6 +11,7 @@ const styles = (disabled: boolean) =>
   disabled ? { pointerEvents: "none", opacity: 0.6 } : {};
 type TemplateProps = {
   disabled: boolean;
+  disabledText: string;
   name: string;
   label:
     | ReactElement<any, string | JSXElementConstructor<any>>
@@ -28,6 +29,7 @@ type TemplateProps = {
 };
 const Default = ({
   disabled = false,
+  disabledText,
   name,
   label,
   comment,
@@ -69,6 +71,7 @@ const Default = ({
           className={errorClass}
           as={errorAs}
         />
+        {disabled && disabledText && <div className="text-danger">{disabledText}</div>}
     </Component>
   );
 };
