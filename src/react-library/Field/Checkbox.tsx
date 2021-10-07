@@ -19,29 +19,42 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
     fieldClass = "form-check-input",
     formCheckLabelClass = "form-check-label",
   } = config;
-  const { handleChange } = formik;
+  const { handleChange, setFieldTouched } = formik;
   return options.map(
-    ({ value:val, label, comment, commentClass = 'd-block' }: OptionWithComment, key: string, index: number) => {
+    (
+      {
+        value: val,
+        label,
+        comment,
+        commentClass = "d-block",
+      }: OptionWithComment,
+      key: string,
+      index: number
+    ) => {
       const fieldName = _.kebabCase(name + " " + val);
       const fieldValue = `${val}:${label}`;
       const isChecked = value && value[key]?.length;
       return (
-        <div key={key} className={formCheckClass}>
+        <div
+          key={key}
+          className={formCheckClass + (error ? " is-invalid " : "")}
+        >
           <label htmlFor={fieldName} className={formCheckLabelClass}>
-            <input
-              id={fieldName}
-              name={`${name}.${key}`}
-              value={fieldValue}
-              className={fieldClass + (error ? " is-invalid " : "")}
-              type="checkbox"
-              checked={isChecked}
-              onChange={(event) => {
-                changeHandler(handleChange, formik, config, event);
-              }}
-              {...attributes}
-            />{" "}
-            {label} {comment && <small className={commentClass}>{comment}</small>}
+            {label}
           </label>
+          <input
+            id={fieldName}
+            name={`${name}.${key}`}
+            value={fieldValue}
+            className={fieldClass + (error ? " is-invalid " : "")}
+            type="checkbox"
+            checked={isChecked}
+            onChange={(event) => {
+              changeHandler(handleChange, formik, config, event);
+            }}
+            {...attributes}
+          />{" "}
+          {comment && <small className={commentClass}>{comment}</small>}
         </div>
       );
     }
