@@ -18,7 +18,7 @@ const Radio = ({ config, formik, value, error }: FieldProps) => {
   } = config;
   const { handleChange } = formik;
   return options.map(({ value:optionValue, label, comment, commentClass = 'd-block' }: OptionWithComment) => (
-      <div className={formCheckClass} key={optionValue}>
+      <div className={formCheckClass + (error ? " is-invalid " : "")} key={optionValue}>
         <label
           htmlFor={name + "_" + optionValue}
           className={formCheckLabelClass}

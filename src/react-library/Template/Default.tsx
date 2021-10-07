@@ -71,7 +71,7 @@ const Default = ({
           className={errorClass}
           as={errorAs}
         />
-        {disabled && disabledText && <div className="text-danger">{disabledText}</div>}
+        {disabled && disabledText && <small className="text-danger">{disabledText}</small>}
     </Component>
   );
 };

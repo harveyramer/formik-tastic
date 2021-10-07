@@ -9,8 +9,8 @@ const ErrorMessage = ({
 }: {
     name: string,
     error: ErrorInfo,
-    className: string,
-    as: any,
+    className?: string,
+    as?: any,
 }) => error && (
     <Component className={ className }>{ error }</Component>
 );
