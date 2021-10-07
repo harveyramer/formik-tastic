@@ -32,8 +32,8 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
       index: number
     ) => {
       const fieldName = _.kebabCase(name + " " + val);
-      const fieldValue = `${val}:${label}`;
-      const isChecked = value && value[key]?.length;
+      const fieldValue = `${val}`;
+      const isChecked = value?.includes(val);
       return (
         <div
           key={key}
@@ -44,7 +44,7 @@ const Checkbox = ({ config, formik, value, error }: FieldProps) => {
           </label>
           <input
             id={fieldName}
-            name={`${name}.${key}`}
+            name={`${name}`}
             value={fieldValue}
             className={fieldClass + (error ? " is-invalid " : "")}
             type="checkbox"
