@@ -1,4 +1,4 @@
-import typescript from 'rollup-plugin-typescript2'
+import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import postcss from "rollup-plugin-postcss";
 import inject from '@rollup/plugin-inject';
@@ -23,10 +23,7 @@ if (process.env.NODE_ENV === 'test') {
       ...Object.keys(pkg.peerDependencies || {}),
     ],
     plugins: [
-      typescript({
-        tsconfig: "tsconfig.json",
-        useTsconfigDeclarationDir: true,
-      }),
+      typescript(),
       commonjs(),
       postcss({
         extensions: ['.css']

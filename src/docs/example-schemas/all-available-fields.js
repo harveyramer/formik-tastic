@@ -273,6 +273,7 @@ export const allAvailableFields = {
                 ]
             },
             codeeditor: {
+                comment: "Code Editor is no longer supported.",
                 name: "codeeditor",
                 label: "Code Editor",
                 type: "field",
