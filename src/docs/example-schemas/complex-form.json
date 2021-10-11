@@ -88,8 +88,8 @@
             "htmlClass": "mt-4",
             "showWhen": [
               "is",
-              "productOptions[1][0]",
-              "unaddressedEventInvitations:Yes, I want unaddressed invitations"
+              "productOptions[1]",
+              "unaddressedEventInvitations"
             ]
           }
         }

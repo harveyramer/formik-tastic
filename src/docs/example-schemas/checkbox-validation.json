@@ -1,0 +1,682 @@
+{
+  "schema": {
+    "id": "certificate-of-insurance",
+    "type": "container",
+    "renderer": "form",
+    "elements": {
+      "notice": {
+        "type": "field",
+        "renderer": "html",
+        "template": "html",
+        "as": "p",
+        "htmlClass": "text-danger fw-bold mb-4",
+        "htmlString": "When you submit this form, the owner will be able to see your name and email address."
+      },
+      "holder": {
+        "name": "holder",
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Certificate Holder",
+        "collapsible": false,
+        "elements": {
+          "row1": {
+            "type": "container",
+            "htmlClass": "row",
+            "renderer": "div",
+            "elements": {
+              "holderName": {
+                "type": "field",
+                "renderer": "text",
+                "name": "name",
+                "htmlClass": "col",
+                "label": "Certificate Holder Name (Required)",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              },
+              "holderEmail": {
+                "type": "field",
+                "renderer": "text",
+                "name": "email",
+                "htmlClass": "col",
+                "label": "Certificate Holder Email (Required)",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      },
+      "coverage": {
+        "name": "coverage",
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Coverage Information",
+        "collapsible": false,
+        "elements": {
+          "type": {
+            "type": "field",
+            "renderer": "checkbox",
+            "name": "type",
+            "htmlClass": "mb-0",
+            "options": [
+              {
+                "label": "General Liability (includes host liquor)",
+                "value": "liability"
+              },
+              {
+                "label": "Auto",
+                "value": "auto"
+              },
+              {
+                "label": "Worker's Comp",
+                "value": "workersComp"
+              },
+              {
+                "label": "Liquor",
+                "value": "liquor"
+              },
+              {
+                "label": "Umbrella/Excess",
+                "value": "umbrella"
+              }
+            ]
+          },
+          "row1": {
+            "type": "container",
+            "htmlClass": "row my-3",
+            "renderer": "div",
+            "elements": {
+              "eventDate": {
+                "type": "field",
+                "renderer": "text",
+                "name": "eventDate",
+                "htmlClass": "col",
+                "label": "Event Date (Required)",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              },
+              "dateNeeded": {
+                "type": "field",
+                "renderer": "text",
+                "name": "dateNeeded",
+                "htmlClass": "col",
+                "label": "Date Needed (if less than 48 hours)"
+              }
+            }
+          },
+          "thirdParty": {
+            "type": "field",
+            "renderer": "radio",
+            "name": "thirdParty",
+            "htmlClass": "mb-0",
+            "label": "Does the contract require the 3rd party to be listed as additional insured on OurOrg's policy?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes",
+                "comment": "If yes, you will be prompted to list the additional insured."
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ],
+            "validation": [
+              [
+                "string"
+              ],
+              [
+                "required"
+              ]
+            ]
+          },
+          "additionalInsured": {
+            "type": "container",
+            "renderer": "fieldset",
+            "title": "Additional Insured",
+            "collapsible": false,
+            "cardClass": "mb-0 mt-4 card",
+            "showWhen": [
+              "is",
+              "coverage.thirdParty",
+              "yes"
+            ],
+            "elements": {
+              "name": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Name of Additional Insured (Required)",
+                "name": "additionalInsured",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              },
+              "requiredLanguage": {
+                "type": "field",
+                "renderer": "textarea",
+                "label": "Required Language (Required)",
+                "name": "requiredLanguage",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      },
+      "forwarding": {
+        "type": "container",
+        "name": "forwarding",
+        "renderer": "fieldset",
+        "title": "Forwarding Recipient",
+        "collapsible": false,
+        "elements": {
+          "row1": {
+            "type": "container",
+            "htmlClass": "row",
+            "renderer": "div",
+            "elements": {
+              "name": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Name (Required)",
+                "name": "name",
+                "htmlClass": "col",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              },
+              "email": {
+                "type": "field",
+                "renderer": "text",
+                "label": "Email (Required)",
+                "name": "email",
+                "htmlClass": "col",
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      },
+      "facilityUse": {
+        "name": "facilityUse",
+        "type": "container",
+        "renderer": "fieldset",
+        "title": "Facility Use",
+        "elements": {
+          "hasAgreement": {
+            "type": "field",
+            "renderer": "radio",
+            "name": "hasAgreement",
+            "htmlClass": "mb-0",
+            "label": "Do you have a Facility Use Agreement?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": "yes",
+                "comment": "If yes, you will be prompted to upload the agreement file."
+              },
+              {
+                "label": "No",
+                "value": "no"
+              }
+            ],
+            "validation": [
+              [
+                "string"
+              ],
+              [
+                "required"
+              ]
+            ]
+          },
+          "agreementFile": {
+            "type": "container",
+            "renderer": "fieldset",
+            "title": "Upload Facility Use Agreement",
+            "collapsible": false,
+            "cardClass": "mb-0 mt-4 card",
+            "showWhen": [
+              "is",
+              "facilityUse.hasAgreement",
+              "yes"
+            ],
+            "elements": {
+              "agreementFile": {
+                "label": "Agreement File Upload",
+                "type": "field",
+                "renderer": "file-uploader",
+                "name": "agreementFile",
+                "options": {
+                  "multiple": true,
+                  "accept": [
+                    "application/pdf",
+                    "application/msword",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "image/*",
+                    "application/vnd.ms-excel",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "application/vnd.ms-powerpoint",
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                  ]
+                },
+                "validation": [
+                  [
+                    "array"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      },
+      "eventInfo": {
+        "name": "eventInfo",
+        "type": "container",
+        "title": "Event Information",
+        "renderer": "fieldset",
+        "collapsible": false,
+        "elements": {
+          "row1": {
+            "htmlClass": "row",
+            "type": "container",
+            "renderer": "div",
+            "elements": {
+              "projectedRevenue": {
+                "type": "field",
+                "renderer": "radio",
+                "label": "Projected Revenue (Required)",
+                "name": "projectedRevenue",
+                "htmlClass": "col",
+                "options": [
+                  {
+                    "label": "< 50K",
+                    "value": "lt50k"
+                  },
+                  {
+                    "label": "50K - 150K",
+                    "value": "50kto150k"
+                  },
+                  {
+                    "label": "> 150K",
+                    "value": "gt150k"
+                  }
+                ],
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              },
+              "projectedAttendees": {
+                "type": "field",
+                "renderer": "radio",
+                "label": "Projected Attendees (Required)",
+                "name": "projectedAttendees",
+                "htmlClass": "col",
+                "options": [
+                  {
+                    "label": "< 100",
+                    "value": "lt100"
+                  },
+                  {
+                    "label": "100 - 250",
+                    "value": "100to250"
+                  },
+                  {
+                    "label": "250 - 500",
+                    "value": "250to500"
+                  },
+                  {
+                    "label": "> 500",
+                    "value": "gt500"
+                  }
+                ],
+                "validation": [
+                  [
+                    "string"
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      },
+      "fireworks": {
+        "name": "fireworks",
+        "type": "container",
+        "renderer": "fieldset",
+        "collapsible": false,
+        "title": "Fireworks Use",
+        "elements": {
+          "row1": {
+            "type": "container",
+            "htmlClass": "row mb-3",
+            "renderer": "div",
+            "elements": {
+              "types": {
+                "type": "field",
+                "renderer": "checkbox",
+                "name": "FireworksTypes",
+                "htmlClass": "mb-0 col",
+                "label": "Fireworks?",
+                "options": [
+                  {
+                    "label": "Snap",
+                    "value": "snap"
+                  },
+                  {
+                    "label": "Crackle",
+                    "value": "crackle"
+                  },
+                  {
+                    "label": "Pop",
+                    "value": "pop"
+                  }
+                ]
+              },
+              "server": {
+                "type": "field",
+                "renderer": "checkbox",
+                "label": "Server of Fireworks (Required)",
+                "htmlClass": "col",
+                "name": "server",
+                "options": [
+                  {
+                    "label": "Facility",
+                    "value": "facility"
+                  },
+                  {
+                    "label": "Hired pyrotechnician",
+                    "value": "hired"
+                  },
+                  {
+                    "label": "Self-serve",
+                    "value": "selfServe"
+                  }
+                ],
+                "validation": [
+                  [
+                    "array"
+                  ],
+                  [
+                    "min",
+                    1
+                  ],
+                  [
+                    "required"
+                  ]
+                ]
+              }
+            }
+          },
+          "agreementDetails": {
+            "type": "container",
+            "htmlClass": "row mb-3",
+            "renderer": "div",
+            "showWhen": [
+              "or",
+              [
+                "is",
+                "Fireworks.server[0]",
+                "facility"
+              ],
+              [
+                "is",
+                "Fireworks.server[1]",
+                "hired"
+              ]
+            ],
+            "elements": {
+              "agreement": {
+                "type": "field",
+                "renderer": "checkbox",
+                "name": "serverAgreement",
+                "htmlClass": "col",
+                "options": [
+                  {
+                    "label": "Written agreement with servers?",
+                    "value": "yes",
+                    "comment": "You will be required to upload the agreement file."
+                  }
+                ],
+                "validation": [
+                  [
+                    "array"
+                  ],
+                  [
+                    "when",
+                    "server[0]",
+                    {
+                      "is": "facility",
+                      "then": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "min",
+                          1
+                        ],
+                        [
+                          "required"
+                        ]
+                      ],
+                      "otherwise": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "nullable"
+                        ]
+                      ]
+                    }
+                  ],
+                  [
+                    "when",
+                    "server[1]",
+                    {
+                      "is": "hired",
+                      "then": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "min",
+                          1
+                        ],
+                        [
+                          "required"
+                        ]
+                      ],
+                      "otherwise": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "nullable"
+                        ]
+                      ]
+                    }
+                  ]
+                ]
+              },
+              "additionalInsured": {
+                "type": "field",
+                "renderer": "checkbox",
+                "name": "additionalInsured",
+                "htmlClass": "col",
+                "options": [
+                  {
+                    "label": "Is OurOrg listed as an additional insured?",
+                    "value": "yes",
+                    "comment": "The agreement file must show OurOrg as additional insured."
+                  }
+                ],
+                "validation": [
+                  [
+                    "array"
+                  ],
+                  [
+                    "when",
+                    "server[0]",
+                    {
+                      "is": "facility",
+                      "then": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "min",
+                          1
+                        ],
+                        [
+                          "required"
+                        ]
+                      ],
+                      "otherwise": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "nullable"
+                        ]
+                      ]
+                    }
+                  ],
+                  [
+                    "when",
+                    "server[1]",
+                    {
+                      "is": "hired",
+                      "then": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "min",
+                          1
+                        ],
+                        [
+                          "required"
+                        ]
+                      ],
+                      "otherwise": [
+                        [
+                          "array"
+                        ],
+                        [
+                          "nullable"
+                        ]
+                      ]
+                    }
+                  ]
+                ]
+              },
+              "agreementFile": {
+                "type": "container",
+                "renderer": "fieldset",
+                "title": "Upload Server Agreement",
+                "collapsible": false,
+                "cardClass": "mb-0 mt-4 card",
+                "elements": {
+                  "agreementFile": {
+                    "type": "field",
+                    "label": "Agreement File Upload",
+                    "renderer": "file-uploader",
+                    "name": "serverAgreementFile",
+                    "options": {
+                      "multiple": true,
+                      "accept": [
+                        "application/pdf",
+                        "application/msword",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        "image/*",
+                        "application/vnd.ms-excel",
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "application/vnd.ms-powerpoint",
+                        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                      ]
+                    },
+                    "validation": [
+                      [
+                        "array"
+                      ],
+                      [
+                        "required"
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "buttonsGroup": {
+        "type": "container",
+        "renderer": "div",
+        "elements": {
+          "save": {
+            "type": "field",
+            "renderer": "button",
+            "name": "save",
+            "content": "Save",
+            "fieldClass": "btn-success btn-lg",
+            "validationErrorClass": "text-danger d-block mb-4",
+            "showErrorOnInvalid": true,
+            "buttonType": "submit"
+          }
+        }
+      }
+    }
+  }
+}
