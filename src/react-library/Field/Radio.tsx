@@ -29,7 +29,7 @@ const Radio = ({ config, formik, value, error }: FieldProps) => {
             className={fieldClass + (error ? " is-invalid " : "")}
             id={name + "_" + optionValue}
             value={optionValue}
-            // checked={isChecked}
+            checked={optionValue === value}
             onChange={(event) => {
               changeHandler(handleChange, formik, config, event);
             }}
