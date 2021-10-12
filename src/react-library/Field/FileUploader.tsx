@@ -66,8 +66,8 @@ const FileUploader = ({ config, formik, error }: FieldProps) => {
   const {
     name,
     options,
-    placeholder,
-    zoneActiveText,
+    zoneInactiveText = "Drag and drop some files here, or click to select files",
+    zoneActiveText = "Drop the files here ...",
     hasThumbs = false,
   } = config;
   const { setFieldValue, setFieldError, handleBlur, setFieldTouched } = formik;
@@ -79,7 +79,10 @@ const FileUploader = ({ config, formik, error }: FieldProps) => {
     options.onDrop = onDrop
       ? onDrop.bind(this, formik, config)
       : (accepted: any, rejected: any, uploadEvent: any) => {
-          setFieldValue(name, (accepted as File[]).map((f:File) => f.name));
+          setFieldValue(
+            name,
+            (accepted as File[]).map((f: File) => f.name)
+          );
         };
     options.onDropAccepted = onDropAccepted
       ? onDropAccepted(formik, config)
@@ -118,45 +121,47 @@ const FileUploader = ({ config, formik, error }: FieldProps) => {
         </div>
       </div>
     ) : (
-      <li key={(file as FileUpload).path}>
+      <li className="text-success" key={(file as FileUpload).path}>
         {(file as FileUpload).path} - {file.size} bytes
       </li>
     );
   });
-  const files = hasThumbs ? filesEls : <ul>{filesEls}</ul>;
+  const files = hasThumbs ? (
+    filesEls
+  ) : (
+    <ul className="list-unstyled my-3">{filesEls}</ul>
+  );
   const rejectsEls = fileRejections.map(
     (uploadErr: { file: File; errors: any[] }) => {
       return (
-        <li key={(uploadErr.file as FileUpload).path}>
+        <li className="text-danger" key={(uploadErr.file as FileUpload).path}>
           {(uploadErr.file as FileUpload).path} - {uploadErr.file.size} bytes -{" "}
           {uploadErr.errors.map((e) => e.message).join(", ")}
         </li>
       );
     }
   );
-  const rejects = <ul>{rejectsEls}</ul>;
+  const rejects = <ul className="list-unstyled my-3">{rejectsEls}</ul>;
   return (
     <section className={"file-uploader" + (error ? " is-invalid " : "")}>
-      <div {...getRootProps({ style })}>
+      <div className="p-4" {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <div>{zoneActiveText}</div>
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <div>{zoneInactiveText}</div>
         )}
       </div>
       {fileRejections?.length ? (
-        <aside>
-          <h3>Errors</h3>
-          {rejects}
+        <aside className="card border-danger my-3">
+          <div className="card-body py-0">{rejects}</div>
         </aside>
       ) : null}
       <aside style={hasThumbs ? thumbsContainer : { display: "block" }}>
         {acceptedFiles?.length ? (
-          <>
-            <h3>Files</h3>
-            {files}
-          </>
+          <aside className="card border-success my-3">
+            <div className="card-body py-0">{files}</div>
+          </aside>
         ) : null}
       </aside>
     </section>
