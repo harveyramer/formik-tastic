@@ -78,10 +78,13 @@ const FileUploader = ({ config, formik, error }: FieldProps) => {
   ) => {
     options.onDrop = onDrop
       ? onDrop.bind(this, formik, config)
-      : (accepted: any, rejected: any, uploadEvent: any) => {
+      : (accepted: any) => {
           setFieldValue(
             name,
-            (accepted as File[]).map((f: File) => f.name)
+            (accepted as File[]).map((f: File) => ({
+              name: f.name,
+              fileType: f.type,
+            }))
           );
         };
     options.onDropAccepted = onDropAccepted

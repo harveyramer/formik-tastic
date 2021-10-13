@@ -24,11 +24,16 @@ const File = ({ config, formik, value = "", error }: FieldProps) => {
     options.onChange = onChange
       ? onChange.bind(this, formik, config)
       : (event: Event) => {
-        setFieldValue(name, Array.from((event.target as any).files as File[]).map((f:File) => f.name));
-      };
+          setFieldValue(
+            name,
+            Array.from((event.target as any).files as File[]).map(
+              (f: File) => ({ name: f.name, fileType: f.type })
+            )
+          );
+        };
     return options;
   };
-  const opts = {  ...prepareFileUploderOptions({ ...options }, formik, config)};
+  const opts = { ...prepareFileUploderOptions({ ...options }, formik, config) };
   return isInputGroup ? (
     <div className={inputGroupClass}>
       <span className="input-group-text">
